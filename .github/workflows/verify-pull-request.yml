@@ -1,0 +1,7 @@
+name: Verify Pull Request
+on: [push, pull_request]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is a placeholder test script."
