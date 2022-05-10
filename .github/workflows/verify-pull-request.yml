@@ -6,8 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3.1.2
-        with:
-          python-version: 3.10
       - uses: britannio/action-install-flutter@v1.1
       - name: Install Python Packages
         working-directory: ./server
