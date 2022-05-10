@@ -1,2 +1,4 @@
 client/build
 client/.dart_tool
+server/.pgpass
+server/.pg_service.conf
