@@ -15,3 +15,11 @@ class ListUserView(ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['username']
     serializer_class = UserSerializer
+
+
+class CreateUserView(CreateAPIView):
+    model = User
+    serializer_class = UserSerializer
+    permission_classes = [
+        permissions.AllowAny  # This allows unauthenticated users to register an account
+    ]
