@@ -44,7 +44,7 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: Colors.red[400],
         ),
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: const Color.fromRGBO(12, 17, 28, 1),
       ),
       home: const HomeScreen(),
     );

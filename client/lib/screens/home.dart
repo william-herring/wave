@@ -9,8 +9,8 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Container(
           width: 300,
-          height: 500,
-          padding: const EdgeInsets.all(16.0),
+          height: 600,
+          padding: const EdgeInsets.fromLTRB(16.0, 80.0, 16.0, 0.0),
           child: Column(
             children: [
               Image.asset('assets/images/logo.png', scale: 26),

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a23dc1d-681a-4093-aa1d-ec40413f4489" name="Changes" comment="Added assets" />
+    <list default="true" id="9a23dc1d-681a-4093-aa1d-ec40413f4489" name="Changes" comment="Added assets">
+      <change beforePath="$PROJECT_DIR$/server/server/.pg_service.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/.pgpass" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
