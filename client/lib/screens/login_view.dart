@@ -128,13 +128,36 @@ class _RegisterPageState extends State<RegisterPage> {
                 Form(
                     child: Column(
                       children: [
+                        Container(
+                          color: Colors.red[500],
+                        ),
+                        const SizedBox(height: 16),
                         TextFormField(decoration: const InputDecoration(
                           label: Text('Email'),
                         )),
                         const SizedBox(height: 16),
-                        TextFormField(obscureText: true, decoration: const InputDecoration(
-                          label: Text('Password'),
+                        TextFormField(decoration: const InputDecoration(
+                          label: Text('Username'),
                         )),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 125,
+                              child: TextFormField(obscureText: true, decoration: const InputDecoration(
+                                label: Text('Password'),
+                              )),
+                            ),
+                            const SizedBox(width: 16),
+                            SizedBox(
+                              width: 125,
+                              child: TextFormField(obscureText: true, decoration: const InputDecoration(
+                                label: Text('Confirm password'),
+                              )),
+                            ),
+                          ],
+                        ),
                         Container(
                           margin: const EdgeInsets.only(top: 16.0),
                           child: InkWell(
