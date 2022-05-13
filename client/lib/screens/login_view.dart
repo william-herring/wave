@@ -50,9 +50,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         body: Center(
           child: Container(
-            width: 300,
             height: 600,
-            padding: const EdgeInsets.fromLTRB(16.0, 80.0, 16.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(46.0, 80.0, 46.0, 0.0),
             child: Column(
               children: [
                 Image.asset('assets/images/logo.png', scale: 26),
@@ -119,9 +118,8 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         body: Center(
           child: Container(
-            width: 300,
             height: 600,
-            padding: const EdgeInsets.fromLTRB(16.0, 80.0, 16.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(46.0, 80.0, 46.0, 0.0),
             child: Column(
               children: [
                 Image.asset('assets/images/logo.png', scale: 26),
@@ -143,15 +141,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: 125,
+                            Expanded(
                               child: TextFormField(obscureText: true, decoration: const InputDecoration(
                                 label: Text('Password'),
                               )),
                             ),
                             const SizedBox(width: 16),
-                            SizedBox(
-                              width: 125,
+                            Expanded(
                               child: TextFormField(obscureText: true, decoration: const InputDecoration(
                                 label: Text('Confirm password'),
                               )),
