@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -8,22 +10,22 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  late final PageController pageController;
+  late final PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController();
+    _pageController = PageController();
   }
 
   @override
   Widget build(BuildContext context) {
     return PageView(
-      controller: pageController,
+      controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        LoginPage(onPageChange: () => pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn)),
-        RegisterPage(onPageChange: () => pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn))
+        LoginPage(onPageChange: () => _pageController.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.easeIn)),
+        RegisterPage(onPageChange: () => _pageController.previousPage(duration: const Duration(milliseconds: 250), curve: Curves.easeIn))
       ],
     );
   }
@@ -41,6 +43,25 @@ class _LoginPageState extends State<LoginPage> {
   late Function() onPageChange;
   _LoginPageState(this.onPageChange);
 
+  final _formKey = GlobalKey<FormState>();
+  String email = '';
+  String password = '';
+
+  void handleSubmit() {
+    _formKey.currentState!.validate();
+    http.post(
+        Uri.parse("http://localhost:3000/api-token-auth/"),
+        headers: { 'Content-Type': 'application/json' },
+        body: jsonEncode({
+          'username': email,
+          'password': password,
+        })
+    ).then((value) async {
+      // TODO: Store token
+      Navigator.pushReplacementNamed(context, '/');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Image.asset('assets/images/logo.png', scale: 26),
                 Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         TextFormField(decoration: const InputDecoration(
