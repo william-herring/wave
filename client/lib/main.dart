@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wave/screens/login_view.dart';
+import 'package:wave/screens/setup.dart';
 
 void main() {
   runApp(const App());
@@ -47,6 +48,10 @@ class App extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromRGBO(12, 17, 28, 1),
       ),
       home: const LoginView(),
+      routes: {
+        '/login': (context) => const LoginView(),
+        '/setup': (context) => const SetupScreen()
+      },
     );
   }
 }

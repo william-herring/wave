@@ -51,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
   void handleSubmit() {
     _formKey.currentState!.validate();
     requestLogin(email, password);
+    Navigator.pushReplacementNamed(context, '/setup');
   }
 
   @override
@@ -71,10 +72,10 @@ class _LoginPageState extends State<LoginPage> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        TextFormField(validator: (input) {
-                          setState(() => email = input!);
-                          return null;
-                        },
+                            TextFormField(validator: (input) {
+                              setState(() => email = input!);
+                              return null;
+                            }, keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
                               label: Text('Email'),
                             )),
@@ -153,7 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(height: 16),
                         TextFormField(decoration: const InputDecoration(
                           label: Text('Email'),
-                        )),
+                        ), keyboardType: TextInputType.emailAddress),
                         const SizedBox(height: 16),
                         TextFormField(decoration: const InputDecoration(
                           label: Text('Username'),
