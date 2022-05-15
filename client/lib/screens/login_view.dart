@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:wave/auth/requests.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -49,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void handleSubmit() {
     _formKey.currentState!.validate();
+    requestLogin(email, password);
   }
 
   @override
@@ -69,17 +71,25 @@ class _LoginPageState extends State<LoginPage> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        TextFormField(decoration: const InputDecoration(
-                          label: Text('Email'),
-                        )),
+                        TextFormField(validator: (input) {
+                          setState(() => email = input!);
+                          return null;
+                        },
+                            decoration: const InputDecoration(
+                              label: Text('Email'),
+                            )),
                         const SizedBox(height: 16),
-                        TextFormField(obscureText: true, decoration: const InputDecoration(
-                          label: Text('Password'),
-                        )),
+                        TextFormField(obscureText: true, validator: (input) {
+                              setState(() => password = input!);
+                              return null;
+                            },
+                            decoration: const InputDecoration(
+                              label: Text('Password'),
+                            )),
                         Container(
                           margin: const EdgeInsets.only(top: 16.0),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () => handleSubmit(),
                             borderRadius: BorderRadius.circular(360),
                             child: Ink(
                               padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
