@@ -49,17 +49,6 @@ class _LoginPageState extends State<LoginPage> {
 
   void handleSubmit() {
     _formKey.currentState!.validate();
-    http.post(
-        Uri.parse("http://localhost:3000/api-token-auth/"),
-        headers: { 'Content-Type': 'application/json' },
-        body: jsonEncode({
-          'username': email,
-          'password': password,
-        })
-    ).then((value) async {
-      // TODO: Store token
-      Navigator.pushReplacementNamed(context, '/');
-    });
   }
 
   @override
