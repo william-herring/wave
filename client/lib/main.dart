@@ -31,6 +31,9 @@ class App extends StatelessWidget {
         fontFamily: 'Ubuntu',
         primaryColor: Colors.white,
         textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white, displayColor: Colors.white),
+        iconTheme: const IconThemeData(
+          color: Colors.white
+        ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.grey.shade700),
           floatingLabelStyle: TextStyle(color: Colors.red.shade400),

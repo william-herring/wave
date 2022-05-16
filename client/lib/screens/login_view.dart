@@ -45,13 +45,23 @@ class _LoginPageState extends State<LoginPage> {
   _LoginPageState(this.onPageChange);
 
   final _formKey = GlobalKey<FormState>();
-  String email = '';
+  String passwordErrorMessage = '';
+  String usernameErrorMessage = '';
+  String username = '';
   String password = '';
 
   void handleSubmit() {
     _formKey.currentState!.validate();
-    requestLogin(email, password);
-    Navigator.pushReplacementNamed(context, '/setup');
+    setState(() {
+      passwordErrorMessage = '';
+      usernameErrorMessage = '';
+    });
+
+    if (password.isEmpty) setState(() => passwordErrorMessage = 'Do not leave this field blank');
+    if (username.isEmpty) setState(() => usernameErrorMessage = 'Do not leave this field blank');
+    if (username.isEmpty && password.isEmpty) return;
+
+    requestLogin(username, password, onSuccess: () => Navigator.pushReplacementNamed(context, '/setup'));
   }
 
   @override
@@ -73,19 +83,21 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                             TextFormField(validator: (input) {
-                              setState(() => email = input!);
+                              setState(() => username = input!);
                               return null;
-                            }, keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              label: Text('Email'),
+                            }, keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              label: const Text('Username'),
+                              errorText: usernameErrorMessage.isNotEmpty? usernameErrorMessage : null
                             )),
                         const SizedBox(height: 16),
                         TextFormField(obscureText: true, validator: (input) {
                               setState(() => password = input!);
                               return null;
                             },
-                            decoration: const InputDecoration(
-                              label: Text('Password'),
+                            decoration: InputDecoration(
+                              label: const Text('Password'),
+                              errorText: passwordErrorMessage.isNotEmpty? passwordErrorMessage : null
                             )),
                         Container(
                           margin: const EdgeInsets.only(top: 16.0),
