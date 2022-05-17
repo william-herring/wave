@@ -8,6 +8,14 @@ class SetupView extends StatefulWidget {
 }
 
 class _SetupViewState extends State<SetupView> {
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,38 +39,61 @@ class _SetupViewState extends State<SetupView> {
       body: Center(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: PageView(
+              controller: _pageController,
               children: [
-                const Text("Before we start, let's work out what suits you", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
-                Container(
-                  margin: const EdgeInsets.only(top: 16.0),
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(360),
-                    child: Ink(
-                      padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-                      child: const SizedBox(
-                        width: 55,
-                        child: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.red[500],
-                          borderRadius: BorderRadius.circular(360)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Before we start, let's work out what suits you", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
+                    Container(
+                      margin: const EdgeInsets.only(top: 16.0),
+                      child: InkWell(
+                        onTap: () {},
+                        borderRadius: BorderRadius.circular(360),
+                        child: Ink(
+                          padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+                          child: const SizedBox(
+                            width: 55,
+                            child: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.red[500],
+                              borderRadius: BorderRadius.circular(360)
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 26.0),
+                      Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 6.0,
+                      children: [
+                        const Icon(Icons.circle, size: 12),
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                      ],
+                    )
+                  ],
                 ),
-                const SizedBox(height: 26.0),
-                  Wrap(
-                  alignment: WrapAlignment.center,
-                  spacing: 6.0,
-                  children: [
-                    const Icon(Icons.circle, size: 12),
-                    Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
-                    Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
-                    Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
-                    Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('2', textAlign: TextAlign.center),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('3'),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('4'),
                   ],
                 )
               ],
