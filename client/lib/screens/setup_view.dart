@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
 
-class SetupScreen extends StatefulWidget {
-  const SetupScreen({Key? key}) : super(key: key);
+class SetupView extends StatefulWidget {
+  const SetupView({Key? key}) : super(key: key);
 
   @override
-  _SetupScreenState createState() => _SetupScreenState();
+  _SetupViewState createState() => _SetupViewState();
 }
 
-class _SetupScreenState extends State<SetupScreen> {
+class _SetupViewState extends State<SetupView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        actions: [
+          GestureDetector(
+            onTap: () {},
+            child: Row(
+              children: [
+                const Text('Skip'),
+                Container(
+                    margin: const EdgeInsets.only(right: 14, left: 6),
+                    child: const Icon(Icons.arrow_forward_ios)
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
       body: Center(
           child: Padding(
             padding: const EdgeInsets.all(10.0),

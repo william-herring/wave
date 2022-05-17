@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wave/screens/login_view.dart';
-import 'package:wave/screens/setup.dart';
+import 'package:wave/screens/setup_view.dart';
 
 void main() {
   runApp(const App());
@@ -31,6 +31,13 @@ class App extends StatelessWidget {
         fontFamily: 'Ubuntu',
         primaryColor: Colors.white,
         textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white, displayColor: Colors.white),
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color.fromRGBO(12, 17, 28, 1),
+          elevation: 0,
+          toolbarTextStyle: TextStyle(fontSize: 16, color: Colors.red[400]),
+          iconTheme: IconThemeData(size: 16, color: Colors.red[400]),
+          foregroundColor: Colors.red[400]
+        ),
         iconTheme: const IconThemeData(
           color: Colors.white
         ),
@@ -53,7 +60,7 @@ class App extends StatelessWidget {
       home: const LoginView(),
       routes: {
         '/login': (context) => const LoginView(),
-        '/setup': (context) => const SetupScreen()
+        '/setup': (context) => const SetupView()
       },
     );
   }
