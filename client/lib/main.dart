@@ -17,6 +17,13 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Ubuntu',
         primaryColor: Colors.white,
+        appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            toolbarTextStyle: TextStyle(fontSize: 16, color: Colors.red[400]),
+            iconTheme: IconThemeData(size: 16, color: Colors.red[400]),
+            foregroundColor: Colors.red[400]
+        ),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16.0),

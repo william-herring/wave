@@ -80,8 +80,24 @@ class _SetupViewState extends State<SetupView> {
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('2', textAlign: TextAlign.center),
+                  children: [
+                    const Text('Theme', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
+                    const SizedBox(height: 16.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/lightdeviceframe.png', scale: 9),
+                        Container(
+                          color: const Color.fromRGBO(12, 17, 28, 1),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text('Lorem ipsum', style: TextStyle(color: Colors.white)),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
                 Column(
