@@ -49,3 +49,4 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/lightdeviceframe.png
+    - assets/images/darkdeviceframe.png

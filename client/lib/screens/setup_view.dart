@@ -47,22 +47,8 @@ class _SetupViewState extends State<SetupView> {
                   children: [
                     const Text("Before we start, let's work out what suits you", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
                     Container(
-                      margin: const EdgeInsets.only(top: 16.0),
-                      child: InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(360),
-                        child: Ink(
-                          padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-                          child: const SizedBox(
-                            width: 55,
-                            child: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
-                          ),
-                          decoration: BoxDecoration(
-                              color: Colors.red[500],
-                              borderRadius: BorderRadius.circular(360)
-                          ),
-                        ),
-                      ),
+                      margin: const EdgeInsets.only(top: 14.0),
+                      child: Text('(Swipe to navigate)', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)))
                     ),
                     const SizedBox(height: 26.0),
                       Wrap(
@@ -81,21 +67,31 @@ class _SetupViewState extends State<SetupView> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Theme', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
+                    const Text('Choose a theme', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
                     const SizedBox(height: 16.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/lightdeviceframe.png', scale: 9),
-                        Container(
-                          color: const Color.fromRGBO(12, 17, 28, 1),
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text('Lorem ipsum', style: TextStyle(color: Colors.white)),
-                            ),
-                          ),
-                        )
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Image.asset('assets/images/lightdeviceframe.png', scale: 9),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Image.asset('assets/images/darkdeviceframe.png', scale: 9),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 26.0),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 6.0,
+                      children: [
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                        const Icon(Icons.circle, size: 12),
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                        Icon(Icons.circle, size: 12, color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
                       ],
                     )
                   ],
