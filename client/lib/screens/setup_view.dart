@@ -9,6 +9,8 @@ class SetupView extends StatefulWidget {
 
 class _SetupViewState extends State<SetupView> {
   late final PageController _pageController;
+  bool storeDataInCloud = true;
+  String theme = 'dark'; // TODO: Update theme accordingly
 
   @override
   void initState() {
@@ -73,12 +75,44 @@ class _SetupViewState extends State<SetupView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: Image.asset('assets/images/lightdeviceframe.png', scale: 9),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: <Widget>[
+                              Container(
+                                child: Image.asset('assets/images/lightdeviceframe.png', scale: 9),
+                                decoration: theme == 'light'? BoxDecoration(border: Border.all(color: Colors.red.shade400, width: 2), borderRadius: const BorderRadius.all(Radius.circular(11))) : null,
+                              ),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    splashColor: Colors.red[400]?.withOpacity(0.5),
+                                    onTap: () => setState(() => theme = 'light'),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: Image.asset('assets/images/darkdeviceframe.png', scale: 9),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: <Widget>[
+                              Container(
+                                  child: Image.asset('assets/images/darkdeviceframe.png', scale: 9),
+                                  decoration: theme == 'dark'? BoxDecoration(border: Border.all(color: Colors.red.shade400, width: 2), borderRadius: const BorderRadius.all(Radius.circular(11))) : null,
+                              ),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    splashColor: Colors.red[400]?.withOpacity(0.5),
+                                    onTap: () => setState(() => theme = 'dark'),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -98,8 +132,11 @@ class _SetupViewState extends State<SetupView> {
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('3'),
+                  children: [
+                    const Text('Where would you like us to store your data?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
+                    const SizedBox(height: 16.0),
+                    Text('Selected: ${storeDataInCloud? 'store in the cloud' : 'keep on my device'}', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)), textAlign: TextAlign.center),
+                    Switch.adaptive(value: storeDataInCloud, onChanged: (value) => setState(() => storeDataInCloud = value), activeColor: Colors.red[400]),
                   ],
                 ),
                 Column(
