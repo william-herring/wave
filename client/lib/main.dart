@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wave/screens/home_screen.dart';
 import 'package:wave/screens/login_view.dart';
 import 'package:wave/screens/setup_view.dart';
 
@@ -41,6 +42,7 @@ class App extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: const Color.fromRGBO(12, 17, 28, 1),
           elevation: 0,
+          titleTextStyle: TextStyle(fontSize: 16, color: Colors.red[400], fontWeight: FontWeight.bold),
           toolbarTextStyle: TextStyle(fontSize: 16, color: Colors.red[400]),
           iconTheme: IconThemeData(size: 16, color: Colors.red[400]),
           foregroundColor: Colors.red[400]
@@ -66,8 +68,9 @@ class App extends StatelessWidget {
       ),
       home: const LoginView(),
       routes: {
+        '/home': (context) => const HomeScreen(),
         '/login': (context) => const LoginView(),
-        '/setup': (context) => const SetupView()
+        '/setup': (context) => const SetupView(),
       },
     );
   }

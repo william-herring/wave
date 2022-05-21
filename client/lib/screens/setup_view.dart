@@ -36,7 +36,7 @@ class _SetupViewState extends State<SetupView> {
         elevation: 0,
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: () => Navigator.pushReplacementNamed(context, '/home'),
             child: Row(
               children: [
                 const Text('Skip'),
@@ -165,7 +165,7 @@ class _SetupViewState extends State<SetupView> {
                     Text('All of your preferences will be saved.', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)), textAlign: TextAlign.center),
                     const SizedBox(height: 16.0),
                     InkWell(
-                      onTap: () {},
+                      onTap: () => Navigator.pushReplacementNamed(context, '/home'),
                       borderRadius: BorderRadius.circular(360),
                       child: Ink(
                         padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
