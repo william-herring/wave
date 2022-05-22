@@ -19,20 +19,19 @@ class ListUserView(ListAPIView):
 
 
 class GetUserView(APIView):
+    serializer_class = UserSerializer
     permission_classes = [
         permissions.IsAuthenticated
     ]
 
     def get(self, request, format=None):
         try:
-            user = User.objects.filter(email=request.user.email)
-            data = UserSerializer(
-                data=user
-            )
+            user = request.user
+            serializer = self.serializer_class(data=request.user)
 
-            return Response(data, status=HTTP_200_OK)
+            return Response(UserSerializer(user).data, status=HTTP_200_OK)
         except:
-            return Response({'Not Found': 'Could not retrieve user data'}, status=HTTP_404_NOT_FOUND)
+            return Response({'Not Found': 'User not found'}, status=HTTP_404_NOT_FOUND)
 
 
 class CreateUserView(CreateAPIView):

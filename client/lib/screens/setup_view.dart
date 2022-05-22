@@ -179,6 +179,8 @@ class _SetupViewState extends State<SetupView> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 26.0),
+                    buildBottomPageIndicator(4, 4)
                   ],
                 )
               ],

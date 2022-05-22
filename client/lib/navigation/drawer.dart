@@ -17,7 +17,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   Future<User> getUser() async {
     final data = await http.get(
-      Uri.parse('http://127.0.0.1:8000/get-user/'),
+      Uri.parse('http://127.0.0.1:8000/api/get-user'),
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ${await getToken()}' },
     );
 
@@ -25,7 +25,7 @@ class _AppDrawerState extends State<AppDrawer> {
       return User.fromJson(jsonDecode(data.body));
     }
 
-    throw Exception('Failed to load user data');
+    throw Exception('Failed to load user data: ${data.body}');
   }
 
   @override
@@ -45,6 +45,7 @@ class _AppDrawerState extends State<AppDrawer> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
+                    color: Colors.red[400],
                     width: double.maxFinite,
                     padding: const EdgeInsets.all(64.0),
                     alignment: Alignment.center,
@@ -53,7 +54,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(360.0),
                             child: Image.network(
-                                'https://ui-avatars.com/api/?name=${snapshot.data!.username}&background=00437d&color=fff')
+                                'https://ui-avatars.com/api/?name=${snapshot.data!.username}&color=575757')
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
