@@ -23,9 +23,9 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Ubuntu',
-        primaryColor: Colors.white,
+        primaryColor: Colors.black,
         appBarTheme: AppBarTheme(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
             toolbarTextStyle: TextStyle(fontSize: 16, color: Colors.red[400]),
             iconTheme: IconThemeData(size: 16, color: Colors.red[400]),

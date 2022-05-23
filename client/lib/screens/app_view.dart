@@ -69,7 +69,7 @@ class _AppViewState extends State<AppView> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(snapshot.data!.username, style: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
+                                    fontWeight: FontWeight.bold, color: Colors.white)),
                               ),
                             ],
                           )
