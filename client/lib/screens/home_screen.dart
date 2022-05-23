@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wave/navigation/drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,8 +8,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        leading: IconButton(icon: const Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer()),
       ),
-      drawer: AppDrawer()
     );
   }
 }

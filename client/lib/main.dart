@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:wave/auth/tokens.dart';
+import 'package:wave/screens/app_view.dart';
 import 'package:wave/screens/home_screen.dart';
 import 'package:wave/screens/login_view.dart';
 import 'package:wave/screens/setup_view.dart';
 
-void main() {
+String? token = '';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  token = await getToken();
   runApp(const App());
 }
 
@@ -66,9 +72,9 @@ class App extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color.fromRGBO(12, 17, 28, 1),
       ),
-      home: const LoginView(),
+      home: token != null? const AppView() : const LoginView(),
       routes: {
-        '/home': (context) => const HomeScreen(),
+        '/home': (context) => const AppView(),
         '/login': (context) => const LoginView(),
         '/setup': (context) => const SetupView(),
       },
