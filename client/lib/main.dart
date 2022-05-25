@@ -24,6 +24,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Ubuntu',
         primaryColor: Colors.black,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.red[400]
+        ),
         appBarTheme: AppBarTheme(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
@@ -44,6 +47,12 @@ class App extends StatelessWidget {
       darkTheme: ThemeData(
         fontFamily: 'Ubuntu',
         primaryColor: Colors.white,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: Colors.red[400],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(22)
+            ),
+        ),
         textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white, displayColor: Colors.white),
         appBarTheme: AppBarTheme(
           backgroundColor: const Color.fromRGBO(12, 17, 28, 1),

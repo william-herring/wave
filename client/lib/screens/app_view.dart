@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:wave/screens/home_screen.dart';
+import 'package:wave/screens/studio_screen.dart';
 import '../adaptive/adaptive_icons.dart';
 import '../auth/tokens.dart';
 import '../objects/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 
 class AppView extends StatefulWidget {
   const AppView({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class _AppViewState extends State<AppView> {
                                 Colors.red.shade400,
                                 Colors.red.shade600
                               ]),
-                              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
+                              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(22), bottomRight: Radius.circular(22))
                           ),
                           child: Column(
                             children: [
@@ -83,12 +85,19 @@ class _AppViewState extends State<AppView> {
               ),
               ListView(shrinkWrap: true, children: [
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    _pageController.jumpToPage(0);
+                    HapticFeedback.lightImpact();
+                    Navigator.pop(context);
+                  },
                   leading: Icon(AdaptiveIcons.home, color: Colors.red[400]),
                   title: Text('Home', style: TextStyle(color: Colors.red[400])),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    _pageController.jumpToPage(1);
+                    Navigator.pop(context);
+                  },
                   leading: Icon(AdaptiveIcons.mic, color: Theme.of(context).primaryColor),
                   title: const Text('Studio'),
                 ),
@@ -111,6 +120,7 @@ class _AppViewState extends State<AppView> {
             physics: const NeverScrollableScrollPhysics(),
             children: const [
               HomeScreen(),
+              StudioScreen()
             ],
         ),
     );
