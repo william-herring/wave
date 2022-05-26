@@ -17,6 +17,7 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   url_launcher: ^6.1.2
   animations: ^2.0.2
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

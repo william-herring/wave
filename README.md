@@ -13,10 +13,10 @@ Wave is an app for viewing sound in waveforms (commonly known as sound waves) an
 Wave is envisioned as a highly-capable sound editor and sampler. The app is built around the concept of waveforms to represent sound visually. The two key features of the app involve both the recording of sound waves, as well as creating sound waves with the use of a visual editor. Aimed to appeal to the scientific/physics community, 'waves' may be shared online and cloned by other users to allow for the scientific community to analyse the same wave(s) and perform individual experiments.
 ## Science
 Sound travels in mechanical waves that are formed from the various frequencies in which particles vibrate. <br><br>
-![An example of physical sound waves](http://www.physicsclassroom.com/Class/sound/tfl.gif)<br>
+![An example of physical sound waves](http://www.physicsclassroom.com/Class/sound/tfl.gif) <br>
 Source: https://www.physicsclassroom.com/ <br><br>
 A wavelength is the distance which a sound wave must travel to complete one wave cycle (one repetition of the pattern). This can also be thought of as the length of the pattern. There are three basic components that make up a sound wave; frequency, wavelength and amplitude. <br><br>
-![A diagram demonstrating the three basic components of a sound wave](https://oceanexplorer.noaa.gov/explorations/sound01/background/acoustics/media/sinewave_261.jpg)<br>
+![A diagram demonstrating the three basic components of a sound wave](https://oceanexplorer.noaa.gov/explorations/sound01/background/acoustics/media/sinewave_261.jpg) <br>
 Source: https://oceanexplorer.noaa.gov <br><br>
 Wavelength has already been defined above, but what are frequency and amplitude? Frequency is the rate at which a cycle occurs. In the example above, this is 2 cycles per second or 2 Hz. The amplitude of a sound wave is represented by its height. The higher a wave is, the louder it is.
 ## Technology
