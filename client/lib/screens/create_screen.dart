@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wave/adaptive/adaptive_icons.dart';
+import 'package:wave/screens/record_screen.dart';
 
 class CreateScreen extends StatefulWidget {
   final VoidCallback closeContainer;
@@ -13,6 +14,7 @@ class CreateScreen extends StatefulWidget {
 class _CreateScreenState extends State<CreateScreen> {
   final VoidCallback closeContainer;
   String mode = 'record';
+  String title = '';
   _CreateScreenState(this.closeContainer);
 
   @override
@@ -27,11 +29,12 @@ class _CreateScreenState extends State<CreateScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Center(
+              Center(
                 child: SizedBox(
                   width: 300,
                   child: TextField(
-                    decoration: InputDecoration(
+                    onChanged: (value) => setState(() => title = value),
+                    decoration: const InputDecoration(
                         label: Text('Title'),
                     )
                   ),
@@ -65,7 +68,11 @@ class _CreateScreenState extends State<CreateScreen> {
               ),
               const SizedBox(height: 16.0),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  mode == 'record'? Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (BuildContext context) => RecordScreen(title: title),
+                  )) : Navigator.pop(context);
+                },
                 borderRadius: BorderRadius.circular(360),
                 child: Ink(
                   padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
