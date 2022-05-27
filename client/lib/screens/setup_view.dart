@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 class SetupView extends StatefulWidget {
   const SetupView({Key? key}) : super(key: key);
@@ -11,6 +14,17 @@ class SetupView extends StatefulWidget {
 class _SetupViewState extends State<SetupView> {
   bool storeDataInCloud = true;
   String theme = 'dark'; // TODO: Update theme accordingly
+  late final SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
+
+  void initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+  }
 
   Widget buildBottomPageIndicator(int size, int page) {
     List<Widget> result = [];
@@ -27,6 +41,13 @@ class _SetupViewState extends State<SetupView> {
 
   void launchRepo() async {
     if (!await launchUrl(Uri.parse('https://github.com/william-herring/wave/'))) throw 'Could not launch URL';
+  }
+
+  void setTheme(String theme) {
+    setState(() => theme = theme);
+    bool isLight = App.themeNotifier.value == ThemeMode.light;
+    App.themeNotifier.value = isLight? ThemeMode.dark : ThemeMode.light;
+    prefs.setString('theme', theme);
   }
 
   @override
@@ -87,7 +108,7 @@ class _SetupViewState extends State<SetupView> {
                                   color: Colors.transparent,
                                   child: InkWell(
                                     splashColor: Colors.red[400]?.withOpacity(0.5),
-                                    onTap: () => setState(() => theme = 'light'),
+                                    onTap: () => setTheme('light'),
                                   ),
                                 ),
                               ),
@@ -107,7 +128,7 @@ class _SetupViewState extends State<SetupView> {
                                   color: Colors.transparent,
                                   child: InkWell(
                                     splashColor: Colors.red[400]?.withOpacity(0.5),
-                                    onTap: () => setState(() => theme = 'dark'),
+                                    onTap: () => setTheme('dark'),
                                   ),
                                 ),
                               ),
