@@ -13,7 +13,7 @@ class SetupView extends StatefulWidget {
 
 class _SetupViewState extends State<SetupView> {
   bool storeDataInCloud = true;
-  String theme = 'dark'; // TODO: Update theme accordingly
+  String theme = 'dark';
   late final SharedPreferences prefs;
 
   @override
@@ -44,10 +44,9 @@ class _SetupViewState extends State<SetupView> {
   }
 
   void setTheme(String theme) {
-    setState(() => theme = theme);
-    bool isLight = App.themeNotifier.value == ThemeMode.light;
-    App.themeNotifier.value = isLight? ThemeMode.dark : ThemeMode.light;
+    App.themeNotifier.value = theme == 'dark'? ThemeMode.dark : ThemeMode.light;
     prefs.setString('theme', theme);
+    setState(() => theme = theme);
   }
 
   @override
@@ -147,7 +146,10 @@ class _SetupViewState extends State<SetupView> {
                     const Text('Where would you like us to store your data?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
                     const SizedBox(height: 16.0),
                     Text('Selected: ${storeDataInCloud? 'store in the cloud' : 'keep on my device'}', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)), textAlign: TextAlign.center),
-                    Switch.adaptive(value: storeDataInCloud, onChanged: (value) => setState(() => storeDataInCloud = value), activeColor: Colors.red[400]),
+                    Switch.adaptive(value: storeDataInCloud, onChanged: (value) {
+                      setState(() => storeDataInCloud = value);
+                      prefs.setBool('storeDataInCloud', storeDataInCloud);
+                    }, activeColor: Colors.red[400]),
                     const SizedBox(height: 26.0),
                     buildBottomPageIndicator(4, 2)
                   ],

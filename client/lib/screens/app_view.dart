@@ -16,8 +16,9 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  late final PageController _pageController;
+  final PageController _pageController = PageController();
   late final Future<User> user;
+  int page = 0;
 
   Future<User> getUser() async {
     final data = await http.get(
@@ -35,8 +36,46 @@ class _AppViewState extends State<AppView> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
     user = getUser();
+  }
+
+  List<Widget> buildNavigationItems() {
+    List<Widget> items = [];
+
+    final pages = [
+      ['Home', AdaptiveIcons.home],
+      ['Studio', AdaptiveIcons.mic],
+      ['Library', AdaptiveIcons.library],
+      ['Learn', AdaptiveIcons.book],
+    ];
+
+    for (int i = 0; i < pages.length; i++) {
+      if (i == page) {
+        items.add(ListTile(
+          onTap: () {
+            setState(() => page = i);
+            _pageController.jumpToPage(i);
+            HapticFeedback.lightImpact();
+            Navigator.pop(context);
+          },
+          leading: Icon(pages[i][1] as IconData, color: Colors.red[400]),
+          title: Text(pages[i][0].toString(), style: TextStyle(color: Colors.red[400])),
+        ));
+        continue;
+      }
+      items.add(ListTile(
+        onTap: () {
+          setState(() => page = i);
+          _pageController.jumpToPage(i);
+          HapticFeedback.lightImpact();
+          Navigator.pop(context);
+        },
+        leading: Icon(pages[i][1] as IconData, color: Theme.of(context).primaryColor),
+        title: Text(pages[i][0].toString()),
+      ));
+    }
+
+    return items;
   }
 
   @override
@@ -69,7 +108,7 @@ class _AppViewState extends State<AppView> {
                                       'https://ui-avatars.com/api/?name=${snapshot.data!.username}&color=575757')
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
                                 child: Text(snapshot.data!.username, style: const TextStyle(
                                     fontWeight: FontWeight.bold, color: Colors.white)),
                               ),
@@ -83,35 +122,7 @@ class _AppViewState extends State<AppView> {
                     );
                   }
               ),
-              ListView(shrinkWrap: true, children: [
-                ListTile(
-                  onTap: () {
-                    _pageController.jumpToPage(0);
-                    HapticFeedback.lightImpact();
-                    Navigator.pop(context);
-                  },
-                  leading: Icon(AdaptiveIcons.home, color: Colors.red[400]),
-                  title: Text('Home', style: TextStyle(color: Colors.red[400])),
-                ),
-                ListTile(
-                  onTap: () {
-                    _pageController.jumpToPage(1);
-                    Navigator.pop(context);
-                  },
-                  leading: Icon(AdaptiveIcons.mic, color: Theme.of(context).primaryColor),
-                  title: const Text('Studio'),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: Icon(AdaptiveIcons.library, color: Theme.of(context).primaryColor),
-                  title: const Text('Library'),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: Icon(AdaptiveIcons.book, color: Theme.of(context).primaryColor),
-                  title: const Text('Learn'),
-                )
-              ])
+              ListView(shrinkWrap: true, children: buildNavigationItems()),
             ],
           ),
         ),
