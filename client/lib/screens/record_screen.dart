@@ -14,6 +14,7 @@ class RecordScreen extends StatefulWidget {
 class _RecordScreenState extends State<RecordScreen> {
   String title;
   late final RecorderController recorderController;
+  bool isRecording = false;
   _RecordScreenState(this.title);
 
   @override
@@ -23,6 +24,9 @@ class _RecordScreenState extends State<RecordScreen> {
   }
 
   void toggleRecording() async {
+    setState(() {
+      isRecording = !isRecording;
+    });
     if (recorderController.isRecording) {
       await recorderController.pause();
       return;
@@ -38,7 +42,7 @@ class _RecordScreenState extends State<RecordScreen> {
         title: Text(title),
         leading: IconButton(icon: Icon(Icons.adaptive.more), onPressed: () {}),
         actions: [
-          IconButton(icon: const Icon(CupertinoIcons.question), onPressed: () {}),
+          IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () {}),
         ],
       ),
       body: Column(
@@ -55,7 +59,7 @@ class _RecordScreenState extends State<RecordScreen> {
           ),
           Container(
             padding: const EdgeInsets.all(4.0),
-            child: IconButton(onPressed: () => toggleRecording(), icon: Icon(AdaptiveIcons.mic)),
+            child: IconButton(onPressed: () => toggleRecording(), icon: Icon(isRecording? Icons.stop : AdaptiveIcons.mic)),
             decoration: BoxDecoration(
               color: Colors.red[400],
               borderRadius: BorderRadius.circular(22),
