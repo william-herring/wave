@@ -45,7 +45,10 @@ class App extends StatelessWidget {
             fontFamily: 'Ubuntu',
             primaryColor: Colors.black,
             floatingActionButtonTheme: FloatingActionButtonThemeData(
-                backgroundColor: Colors.red[400]
+                backgroundColor: Colors.red[400],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(22)
+                ),
             ),
             appBarTheme: AppBarTheme(
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,

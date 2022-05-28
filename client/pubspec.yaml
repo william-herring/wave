@@ -18,6 +18,7 @@ dependencies:
   url_launcher: ^6.1.2
   animations: ^2.0.2
   shared_preferences: ^2.0.15
+  audio_waveforms: ^0.1.1
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:audio_waveforms/audio_waveforms.dart';
+import '../adaptive/adaptive_icons.dart';
 
 class RecordScreen extends StatefulWidget {
   String title;
@@ -10,10 +13,56 @@ class RecordScreen extends StatefulWidget {
 
 class _RecordScreenState extends State<RecordScreen> {
   String title;
+  late final RecorderController recorderController;
   _RecordScreenState(this.title);
 
   @override
+  void initState() {
+    super.initState();
+    recorderController = RecorderController();
+  }
+
+  void toggleRecording() async {
+    if (recorderController.isRecording) {
+      await recorderController.pause();
+      return;
+    } else {
+      await recorderController.record();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        leading: IconButton(icon: Icon(Icons.adaptive.more), onPressed: () {}),
+        actions: [
+          IconButton(icon: const Icon(CupertinoIcons.question), onPressed: () {}),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AudioWaveforms(
+            size: const Size(double.infinity, 80.0),
+            waveStyle: const WaveStyle(
+              showMiddleLine: false,
+              waveThickness: 4,
+              extendWaveform: true,
+            ),
+            recorderController: recorderController,
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: IconButton(onPressed: () => toggleRecording(), icon: Icon(AdaptiveIcons.mic)),
+            decoration: BoxDecoration(
+              color: Colors.red[400],
+              borderRadius: BorderRadius.circular(22),
+            ),
+          )
+        ]
+      ),
+    );
   }
 }
