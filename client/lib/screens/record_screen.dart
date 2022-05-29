@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
@@ -15,6 +14,8 @@ class RecordScreen extends StatefulWidget {
 class _RecordScreenState extends State<RecordScreen> {
   String title;
   late final RecorderController recorderController;
+  late final PlayerController playerController;
+  bool isEditing = false;
   bool isRecording = false;
   _RecordScreenState(this.title);
 
@@ -22,6 +23,12 @@ class _RecordScreenState extends State<RecordScreen> {
   void initState() {
     super.initState();
     recorderController = RecorderController();
+  }
+
+  @override
+  void dispose() {
+    recorderController.disposeFunc();
+    super.dispose();
   }
 
   void toggleRecording() async {
@@ -32,6 +39,7 @@ class _RecordScreenState extends State<RecordScreen> {
       await recorderController.pause();
       return;
     } else {
+      recorderController.refresh();
       await recorderController.record();
     }
   }
@@ -49,22 +57,60 @@ class _RecordScreenState extends State<RecordScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AudioWaveforms(
-            size: const Size(double.infinity, 80.0),
-            waveStyle: const WaveStyle(
-              showMiddleLine: false,
-              waveThickness: 4,
-              extendWaveform: true,
-            ),
-            recorderController: recorderController,
-          ),
           Container(
-            padding: const EdgeInsets.all(4.0),
-            child: IconButton(onPressed: () => toggleRecording(), icon: Icon(isRecording? Icons.stop : AdaptiveIcons.mic)),
-            decoration: BoxDecoration(
-              color: Colors.red[400],
-              borderRadius: BorderRadius.circular(22),
+            width: MediaQuery.of(context).size.width - 40,
+            margin: const EdgeInsets.all(12),
+            padding: isEditing? const EdgeInsets.all(6) : null,
+            child: AudioWaveforms(
+              enableGesture: true,
+              size: const Size(double.infinity, 80.0),
+              waveStyle: const WaveStyle(
+                showMiddleLine: false,
+                waveThickness: 4,
+                extendWaveform: true,
+              ),
+              recorderController: recorderController,
             ),
+            decoration: isEditing? BoxDecoration(
+              border: Border(
+                  left: const BorderSide(color: Colors.yellow, width: 5),
+                  right: const BorderSide(color: Colors.yellow, width: 5),
+                  top: BorderSide(color: Colors.yellow.withOpacity(0.4), width: 2),
+                  bottom: BorderSide(color: Colors.yellow.withOpacity(0.4), width: 2),
+              ),
+            ) : null,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(4.0),
+                margin: const EdgeInsets.only(right: 6),
+                child: IconButton(onPressed: () {}, icon: Icon(AdaptiveIcons.play)),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(22),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(4.0),
+                margin: const EdgeInsets.only(left: 6, right: 6),
+                child: IconButton(onPressed: () => toggleRecording(), icon: Icon(isRecording? Icons.stop : AdaptiveIcons.mic)),
+                decoration: BoxDecoration(
+                  color: Colors.red[400],
+                  borderRadius: BorderRadius.circular(22),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(4.0),
+                margin: const EdgeInsets.only(left: 6),
+                child: IconButton(onPressed: () => setState(() => isEditing = !isEditing), icon: Icon(AdaptiveIcons.edit)),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(22),
+                ),
+              ),
+            ],
           )
         ]
       ),

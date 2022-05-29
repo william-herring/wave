@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 
-import 'package:wave/main.dart';
-
 void showAdaptiveAlertDialog(BuildContext context) {
   Platform.isAndroid?
   showDialog<String>(
