@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:wave/adaptive/adaptive_dialog.dart';
 import '../adaptive/adaptive_icons.dart';
 
 class RecordScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _RecordScreenState extends State<RecordScreen> {
         title: Text(title),
         leading: IconButton(icon: Icon(Icons.adaptive.more), onPressed: () {}),
         actions: [
-          IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () {}),
+          IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () => showAdaptiveAlertDialog(context)),
         ],
       ),
       body: Column(
