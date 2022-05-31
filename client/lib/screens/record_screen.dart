@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
 import '../adaptive/adaptive_icons.dart';
+import 'package:record/record.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class RecordScreen extends StatefulWidget {
-  String title;
-  RecordScreen({Key? key, required this.title}) : super(key: key);
+  final String title;
+  const RecordScreen({Key? key, required this.title}) : super(key: key);
 
   @override
   _RecordScreenState createState() => _RecordScreenState(title);
@@ -14,7 +16,8 @@ class RecordScreen extends StatefulWidget {
 class _RecordScreenState extends State<RecordScreen> {
   String title;
   late final RecorderController recorderController;
-  late final PlayerController playerController;
+  final Record audioRecorder = Record();
+  final AudioPlayer audioPlayer = AudioPlayer();
   bool isEditing = false;
   bool isRecording = false;
   _RecordScreenState(this.title);
@@ -36,9 +39,16 @@ class _RecordScreenState extends State<RecordScreen> {
       isRecording = !isRecording;
     });
     if (recorderController.isRecording) {
+      await audioRecorder.pause();
       await recorderController.pause();
       return;
     } else {
+      if (await audioRecorder.hasPermission()) {
+        await audioRecorder.start(
+          path: 'aFullPath/myFile.m4a'
+        );
+      }
+
       recorderController.refresh();
       await recorderController.record();
     }
@@ -57,6 +67,11 @@ class _RecordScreenState extends State<RecordScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          !isRecording && recorderController.waveData.isEmpty? Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                children: [const Text('Tap'), Icon(AdaptiveIcons.mic), const Text('to begin recording.')]),
+          ) :
           Container(
             width: MediaQuery.of(context).size.width - 40,
             margin: const EdgeInsets.all(12),
@@ -67,7 +82,6 @@ class _RecordScreenState extends State<RecordScreen> {
               waveStyle: const WaveStyle(
                 showMiddleLine: false,
                 waveThickness: 4,
-                extendWaveform: true,
               ),
               recorderController: recorderController,
             ),
@@ -86,7 +100,9 @@ class _RecordScreenState extends State<RecordScreen> {
               Container(
                 padding: const EdgeInsets.all(4.0),
                 margin: const EdgeInsets.only(right: 6),
-                child: IconButton(onPressed: () {}, icon: Icon(AdaptiveIcons.play)),
+                child: IconButton(onPressed: () {
+                  audioPlayer.play('testurldoesnotwork.com');
+                }, icon: Icon(AdaptiveIcons.play)),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(22),
@@ -108,6 +124,7 @@ class _RecordScreenState extends State<RecordScreen> {
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(22),
+                  border: isEditing? Border.all(color: Colors.yellow) : null
                 ),
               ),
             ],

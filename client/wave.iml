@@ -18,6 +18,18 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_secure_storage/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_secure_storage/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_secure_storage/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audio_waveforms/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audio_waveforms/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audio_waveforms/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audio_waveforms/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audio_waveforms/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audio_waveforms/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/example/.pub" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
