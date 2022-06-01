@@ -21,6 +21,7 @@ dependencies:
   audio_waveforms: ^0.1.1
   record: ^4.1.1
   audioplayers: ^0.20.1
+  flutter_sound: ^9.2.13
 
 dev_dependencies:
   flutter_test:

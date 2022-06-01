@@ -3,6 +3,7 @@ import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
 import '../adaptive/adaptive_icons.dart';
 import 'package:record/record.dart';
+import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 
 class RecordScreen extends StatefulWidget {
@@ -15,9 +16,11 @@ class RecordScreen extends StatefulWidget {
 
 class _RecordScreenState extends State<RecordScreen> {
   String title;
+  String? audioPath;
   late final RecorderController recorderController;
   final Record audioRecorder = Record();
   final AudioPlayer audioPlayer = AudioPlayer();
+  bool audioRecorderReady = false;
   bool isEditing = false;
   bool isRecording = false;
   _RecordScreenState(this.title);
@@ -25,6 +28,7 @@ class _RecordScreenState extends State<RecordScreen> {
   @override
   void initState() {
     super.initState();
+    audioPath = Platform.isAndroid? 'sdcard/sound.wav' : 'sound.wav';
     recorderController = RecorderController();
   }
 
@@ -43,15 +47,25 @@ class _RecordScreenState extends State<RecordScreen> {
       await recorderController.pause();
       return;
     } else {
-      if (await audioRecorder.hasPermission()) {
-        await audioRecorder.start(
-          path: 'aFullPath/myFile.m4a'
-        );
+      if (audioRecorderReady) {
+        await audioRecorder.resume();
       }
-
+      if (await audioRecorder.hasPermission() && !audioRecorderReady) {
+        await audioRecorder.start(
+          path: audioPath,
+        );
+        audioRecorderReady = true;
+      }
       recorderController.refresh();
       await recorderController.record();
     }
+  }
+
+  void playRecording() async {
+    await audioRecorder.stop();
+    await recorderController.pause();
+    print(audioPath);
+    await audioPlayer.play(audioPath!, isLocal: true);
   }
 
   @override
@@ -100,9 +114,7 @@ class _RecordScreenState extends State<RecordScreen> {
               Container(
                 padding: const EdgeInsets.all(4.0),
                 margin: const EdgeInsets.only(right: 6),
-                child: IconButton(onPressed: () {
-                  audioPlayer.play('testurldoesnotwork.com');
-                }, icon: Icon(AdaptiveIcons.play)),
+                child: IconButton(onPressed: () => playRecording(), icon: Icon(AdaptiveIcons.play)),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(22),
