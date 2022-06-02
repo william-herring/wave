@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wave/auth/tokens.dart';
 import 'package:wave/dev/tool/clear_data.dart';
 import 'package:wave/screens/app_view.dart';
-import 'package:wave/screens/login_view.dart';
 import 'package:wave/screens/setup_view.dart';
 
-String? token = '';
 late final SharedPreferences prefs;
+bool? completedIntro = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Uncomment below to clear all user data/preferences
   // clearData();
   prefs = await SharedPreferences.getInstance();
-  token = await getToken();
+  completedIntro = prefs.getBool('completedIntro');
+  completedIntro ??= false;
   runApp(const App());
 }
 
@@ -104,10 +103,9 @@ class App extends StatelessWidget {
             ),
             scaffoldBackgroundColor: const Color.fromRGBO(12, 17, 28, 1),
           ),
-          home: token != null? const AppView() : const LoginView(),
+          home: completedIntro!? const AppView() : const SetupView(),
           routes: {
             '/home': (context) => const AppView(),
-            '/login': (context) => const LoginView(),
             '/setup': (context) => const SetupView(),
           },
         );

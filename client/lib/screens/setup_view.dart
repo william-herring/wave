@@ -12,7 +12,7 @@ class SetupView extends StatefulWidget {
 }
 
 class _SetupViewState extends State<SetupView> {
-  bool storeDataInCloud = true;
+  bool dyslexiaMode = false;
   String theme = 'dark';
   late final SharedPreferences prefs;
 
@@ -56,7 +56,10 @@ class _SetupViewState extends State<SetupView> {
         elevation: 0,
         actions: [
           GestureDetector(
-            onTap: () => Navigator.pushReplacementNamed(context, '/home'),
+            onTap: () {
+              prefs.setBool('completedIntro', true);
+              Navigator.pushReplacementNamed(context, '/home');
+            },
             child: Row(
               children: [
                 const Text('Skip'),
@@ -143,12 +146,12 @@ class _SetupViewState extends State<SetupView> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Where would you like us to store your data?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
+                    const Text('Dyslexia mode', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
                     const SizedBox(height: 16.0),
-                    Text('Selected: ${storeDataInCloud? 'store in the cloud' : 'keep on my device'}', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)), textAlign: TextAlign.center),
-                    Switch.adaptive(value: storeDataInCloud, onChanged: (value) {
-                      setState(() => storeDataInCloud = value);
-                      prefs.setBool('storeDataInCloud', storeDataInCloud);
+                    Text('When turned on, a dyslexia-friendly font will be applied.', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)), textAlign: TextAlign.center),
+                    Switch.adaptive(value: dyslexiaMode, onChanged: (value) {
+                      setState(() => dyslexiaMode = value);
+                      prefs.setBool('dyslexiaMode', dyslexiaMode);
                     }, activeColor: Colors.red[400]),
                     const SizedBox(height: 26.0),
                     buildBottomPageIndicator(4, 2)
@@ -188,7 +191,10 @@ class _SetupViewState extends State<SetupView> {
                     Text('All of your preferences will be saved.', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)), textAlign: TextAlign.center),
                     const SizedBox(height: 16.0),
                     InkWell(
-                      onTap: () => Navigator.pushReplacementNamed(context, '/home'),
+                      onTap: () {
+                        prefs.setBool('completedIntro', true);
+                        Navigator.pushReplacementNamed(context, '/home');
+                      },
                       borderRadius: BorderRadius.circular(360),
                       child: Ink(
                         padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
