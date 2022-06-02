@@ -79,10 +79,7 @@ class _AppViewState extends State<AppView> {
                 ),
                 child: Column(
                   children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(360.0),
-                        child: Image.asset('assets/images/logo.png', scale: 24),
-                    )
+                    Image.asset('assets/images/logo.png', scale: 24)
                   ],
                 )
               ),
