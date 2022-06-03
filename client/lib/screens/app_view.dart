@@ -79,7 +79,7 @@ class _AppViewState extends State<AppView> {
                 ),
                 child: Column(
                   children: [
-                    Image.asset('assets/images/logo.png', scale: 24)
+                    Image.asset('assets/images/logo.png', scale: 24, color: Colors.white.withOpacity(0.4))
                   ],
                 )
               ),
