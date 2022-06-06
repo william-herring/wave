@@ -21,7 +21,6 @@ dependencies:
   audio_waveforms: ^0.1.1
   record: ^4.1.1
   audioplayers: ^0.20.1
-  flutter_sound: ^9.2.13
 
 dev_dependencies:
   flutter_test:
@@ -31,27 +30,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  fonts:
-    - family: Ubuntu
-      fonts:
-        - asset: assets/fonts/ubuntu/Ubuntu-Regular.ttf
-        - asset: assets/fonts/ubuntu/Ubuntu-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/ubuntu/Ubuntu-Italic.ttf
-          style: italic
-        - asset: assets/fonts/ubuntu/Ubuntu-BoldItalic.ttf
-          style: italic
-          weight: 700
-        - asset: assets/fonts/ubuntu/Ubuntu-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/ubuntu/Ubuntu-MediumItalic.ttf
-          style: italic
-          weight: 500
-        - asset: assets/fonts/ubuntu/Ubuntu-Light.ttf
-          weight: 300
-        - asset: assets/fonts/ubuntu/Ubuntu-LightItalic.ttf
-          style: italic
-          weight: 300
 
   assets:
     - assets/images/logo.png

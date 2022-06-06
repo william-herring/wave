@@ -10,7 +10,7 @@ bool? completedIntro = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Uncomment below to clear all user data/preferences
-  // clearData();
+  clearData();
   prefs = await SharedPreferences.getInstance();
   completedIntro = prefs.getBool('completedIntro');
   completedIntro ??= false;
@@ -41,7 +41,6 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           themeMode: theme,
           theme: ThemeData(
-            fontFamily: 'Ubuntu',
             primaryColor: Colors.black,
             floatingActionButtonTheme: FloatingActionButtonThemeData(
                 backgroundColor: Colors.red[400],
@@ -67,7 +66,6 @@ class App extends StatelessWidget {
           ),
 
           darkTheme: ThemeData(
-            fontFamily: 'Ubuntu',
             primaryColor: Colors.white,
             floatingActionButtonTheme: FloatingActionButtonThemeData(
               backgroundColor: Colors.red[400],

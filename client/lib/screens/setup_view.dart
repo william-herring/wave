@@ -86,7 +86,7 @@ class _SetupViewState extends State<SetupView> {
                       child: Text('(Swipe to navigate)', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)))
                     ),
                     const SizedBox(height: 26.0),
-                    buildBottomPageIndicator(4, 0)
+                    buildBottomPageIndicator(3, 0)
                   ],
                 ),
                 Column(
@@ -140,21 +140,7 @@ class _SetupViewState extends State<SetupView> {
                       ],
                     ),
                     const SizedBox(height: 26.0),
-                    buildBottomPageIndicator(4, 1)
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Dyslexia mode', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
-                    const SizedBox(height: 16.0),
-                    Text('When turned on, a dyslexia-friendly font will be applied.', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)), textAlign: TextAlign.center),
-                    Switch.adaptive(value: dyslexiaMode, onChanged: (value) {
-                      setState(() => dyslexiaMode = value);
-                      prefs.setBool('dyslexiaMode', dyslexiaMode);
-                    }, activeColor: Colors.red[400]),
-                    const SizedBox(height: 26.0),
-                    buildBottomPageIndicator(4, 2)
+                    buildBottomPageIndicator(3, 1)
                   ],
                 ),
                 Column(
@@ -180,7 +166,7 @@ class _SetupViewState extends State<SetupView> {
                       ),
                     ),
                     const SizedBox(height: 26.0),
-                    buildBottomPageIndicator(4, 3)
+                    buildBottomPageIndicator(3, 2)
                   ],
                 ),
                 Column(
@@ -209,7 +195,7 @@ class _SetupViewState extends State<SetupView> {
                       ),
                     ),
                     const SizedBox(height: 26.0),
-                    buildBottomPageIndicator(4, 4)
+                    buildBottomPageIndicator(3, 3)
                   ],
                 )
               ],
