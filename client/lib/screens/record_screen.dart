@@ -18,9 +18,6 @@ class _RecordScreenState extends State<RecordScreen> {
   String title;
   String? audioPath;
   late final RecorderController recorderController;
-  final Record audioRecorder = Record();
-  final AudioPlayer audioPlayer = AudioPlayer();
-  bool audioRecorderReady = false;
   bool isEditing = false;
   bool isRecording = false;
   _RecordScreenState(this.title);
@@ -43,29 +40,16 @@ class _RecordScreenState extends State<RecordScreen> {
       isRecording = !isRecording;
     });
     if (recorderController.isRecording) {
-      await audioRecorder.pause();
       await recorderController.pause();
       return;
     } else {
-      if (audioRecorderReady) {
-        await audioRecorder.resume();
-      }
-      if (await audioRecorder.hasPermission() && !audioRecorderReady) {
-        await audioRecorder.start(
-          path: audioPath,
-        );
-        audioRecorderReady = true;
-      }
       recorderController.refresh();
       await recorderController.record();
     }
   }
 
   void playRecording() async {
-    await audioRecorder.stop();
     await recorderController.pause();
-    print(audioPath);
-    await audioPlayer.play(audioPath!, isLocal: true);
   }
 
   @override
