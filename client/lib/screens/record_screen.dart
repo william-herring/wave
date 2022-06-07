@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
 import '../adaptive/adaptive_icons.dart';
-import 'package:record/record.dart';
 import 'dart:io';
-import 'package:audioplayers/audioplayers.dart';
 
 class RecordScreen extends StatefulWidget {
   final String title;
@@ -20,6 +18,7 @@ class _RecordScreenState extends State<RecordScreen> {
   late final RecorderController recorderController;
   bool isEditing = false;
   bool isRecording = false;
+  List<double> waveData = [];
   _RecordScreenState(this.title);
 
   @override
@@ -41,6 +40,9 @@ class _RecordScreenState extends State<RecordScreen> {
     });
     if (recorderController.isRecording) {
       await recorderController.pause();
+      setState(() {
+        waveData = recorderController.waveData;
+      });
       return;
     } else {
       recorderController.refresh();
@@ -111,16 +113,6 @@ class _RecordScreenState extends State<RecordScreen> {
                 decoration: BoxDecoration(
                   color: Colors.red[400],
                   borderRadius: BorderRadius.circular(22),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(4.0),
-                margin: const EdgeInsets.only(left: 6),
-                child: IconButton(onPressed: () => setState(() => isEditing = !isEditing), icon: Icon(AdaptiveIcons.edit)),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(22),
-                  border: isEditing? Border.all(color: Colors.yellow) : null
                 ),
               ),
             ],
