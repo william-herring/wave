@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wave/adaptive/adaptive_icons.dart';
 import 'package:animations/animations.dart';
 import 'package:wave/screens/create_screen.dart';
+import 'package:wave/screens/record_screen.dart';
 
 class StudioScreen extends StatelessWidget {
   const StudioScreen({Key? key}) : super(key: key);
@@ -9,7 +10,9 @@ class StudioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(AdaptiveIcons.mic)),
+      floatingActionButton: FloatingActionButton(onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (BuildContext context) => const RecordScreen(title: 'New recording'),
+      )), child: Icon(AdaptiveIcons.mic)),
       appBar: AppBar(
         title: const Text('Studio'),
         leading: IconButton(icon: const Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer()),

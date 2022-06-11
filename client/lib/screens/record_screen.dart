@@ -42,6 +42,7 @@ class _RecordScreenState extends State<RecordScreen> {
       await recorderController.pause();
       setState(() {
         waveData = recorderController.waveData;
+        print(waveData);
       });
       return;
     } else {
@@ -87,10 +88,10 @@ class _RecordScreenState extends State<RecordScreen> {
             ),
             decoration: isEditing? BoxDecoration(
               border: Border(
-                  left: const BorderSide(color: Colors.yellow, width: 5),
-                  right: const BorderSide(color: Colors.yellow, width: 5),
-                  top: BorderSide(color: Colors.yellow.withOpacity(0.4), width: 2),
-                  bottom: BorderSide(color: Colors.yellow.withOpacity(0.4), width: 2),
+                left: const BorderSide(color: Colors.yellow, width: 5),
+                right: const BorderSide(color: Colors.yellow, width: 5),
+                top: BorderSide(color: Colors.yellow.withOpacity(0.4), width: 2),
+                bottom: BorderSide(color: Colors.yellow.withOpacity(0.4), width: 2),
               ),
             ) : null,
           ),
