@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 
-void showAdaptiveAlertDialog(BuildContext context) {
+void showAdaptiveAlertDialog(BuildContext context, void Function() onSave) {
   Platform.isAndroid?
   showDialog<String>(
     context: context,
@@ -10,12 +10,12 @@ void showAdaptiveAlertDialog(BuildContext context) {
       title: const Text('Save changes?', style: TextStyle(color: Colors.black)),
       actions: <Widget>[
         TextButton(
-        onPressed: () => Navigator.pop(context, 'Cancel'),
-        child: const Text('Discard'),
+          onPressed: () => Navigator.pop(context, 'Cancel'),
+          child: const Text('Discard'),
         ),
         TextButton(
-        onPressed: () => Navigator.pop(context, 'OK'),
-        child: const Text('Save'),
+          onPressed: onSave,
+          child: const Text('Save'),
         ),
       ],
     ),
@@ -32,7 +32,7 @@ void showAdaptiveAlertDialog(BuildContext context) {
         ),
         CupertinoDialogAction(
           isDefaultAction: true,
-          onPressed: () => Navigator.pop(context),
+          onPressed: onSave,
           child: const Text('Save'),
         )
       ],

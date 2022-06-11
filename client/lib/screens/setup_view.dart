@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../main.dart';
 
 class SetupView extends StatefulWidget {
@@ -13,7 +12,7 @@ class SetupView extends StatefulWidget {
 
 class _SetupViewState extends State<SetupView> {
   bool dyslexiaMode = false;
-  String theme = 'dark';
+  String theme = getThemeMode() == ThemeMode.light? 'light' : 'dark';
   late final SharedPreferences prefs;
 
   @override
@@ -80,7 +79,7 @@ class _SetupViewState extends State<SetupView> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Before we start, let's work out what suits you", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
+                    const Text("Welcome to Wave! Before we start, let's work out what suits you", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
                     Container(
                       margin: const EdgeInsets.only(top: 14.0),
                       child: Text('(Swipe to navigate)', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor.withOpacity(0.5)))
