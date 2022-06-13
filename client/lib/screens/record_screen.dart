@@ -40,7 +40,6 @@ class _RecordScreenState extends State<RecordScreen> {
       setState(() {
         waveData = recorderController.waveData;
       });
-      return;
     } else {
       recorderController.refresh();
       await recorderController.record();
