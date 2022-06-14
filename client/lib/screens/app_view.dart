@@ -5,19 +5,22 @@ import '../adaptive/adaptive_icons.dart';
 import 'package:flutter/services.dart';
 
 class AppView extends StatefulWidget {
-  const AppView({Key? key}) : super(key: key);
+  AppView({Key? key, required this.page}) : super(key: key);
+  int page;
 
   @override
-  _AppViewState createState() => _AppViewState();
+  _AppViewState createState() => _AppViewState(page);
 }
 
 class _AppViewState extends State<AppView> {
-  final PageController _pageController = PageController();
-  int page = 0;
+  _AppViewState(this.page);
+  late final PageController _pageController;
+  int page;
 
   @override
   void initState() {
     super.initState();
+   _pageController = PageController(initialPage: page);
   }
 
   List<Widget> buildNavigationItems() {

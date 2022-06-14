@@ -101,9 +101,9 @@ class App extends StatelessWidget {
             ),
             scaffoldBackgroundColor: const Color.fromRGBO(12, 17, 28, 1),
           ),
-          home: completedIntro!? const AppView() : const SetupView(),
+          home: completedIntro!? AppView(page: 0) : const SetupView(),
           routes: {
-            '/home': (context) => const AppView(),
+            '/home': (context) => AppView(page: 0),
             '/setup': (context) => const SetupView(),
           },
         );

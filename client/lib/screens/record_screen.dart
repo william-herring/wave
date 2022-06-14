@@ -3,6 +3,7 @@ import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
 import 'package:wave/main.dart';
 import '../adaptive/adaptive_icons.dart';
+import 'app_view.dart';
 
 class RecordScreen extends StatefulWidget {
   final String title;
@@ -62,7 +63,7 @@ class _RecordScreenState extends State<RecordScreen> {
               isRecording = false;
               waveData = recorderController.waveData;
             }));
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AppView(page: 1)));
           })),
         ],
       ),
