@@ -10,7 +10,7 @@ bool? completedIntro = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Uncomment below to clear all user data/preferences
-  // clearData();
+  clearData();
   prefs = await SharedPreferences.getInstance();
   completedIntro = prefs.getBool('completedIntro');
   completedIntro ??= false;

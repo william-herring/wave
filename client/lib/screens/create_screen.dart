@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wave/adaptive/adaptive_icons.dart';
+import 'package:wave/screens/plot_screen.dart';
 import 'package:wave/screens/record_screen.dart';
 
 class CreateScreen extends StatefulWidget {
@@ -70,8 +71,10 @@ class _CreateScreenState extends State<CreateScreen> {
               InkWell(
                 onTap: () {
                   mode == 'record'? Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (BuildContext context) => RecordScreen(title: title),
-                  )) : Navigator.pop(context);
+                    builder: (BuildContext context) => RecordScreen(title: title.isEmpty? 'Untitled' : title),
+                  )) : Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (BuildContext context) => PlotScreen(title: title.isEmpty? 'Untitled' : title),
+                  ));
                 },
                 borderRadius: BorderRadius.circular(360),
                 child: Ink(

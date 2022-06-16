@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
-import 'package:wave/main.dart';
 import '../adaptive/adaptive_icons.dart';
 import 'app_view.dart';
 
