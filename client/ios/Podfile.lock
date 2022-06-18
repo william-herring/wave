@@ -1,6 +1,12 @@
 PODS:
   - audio_waveforms (0.0.1):
     - Flutter
+  - AudioKit (4.11.2):
+    - AudioKit/Core (= 4.11.2)
+    - AudioKit/UI (= 4.11.2)
+  - AudioKit/Core (4.11.2)
+  - AudioKit/UI (4.11.2):
+    - AudioKit/Core
   - audioplayers (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -11,6 +17,9 @@ PODS:
   - record (0.0.1):
     - Flutter
   - shared_preferences_ios (0.0.1):
+    - Flutter
+  - sound_generator (0.0.1):
+    - AudioKit (< 5)
     - Flutter
   - url_launcher_ios (0.0.1):
     - Flutter
@@ -23,7 +32,12 @@ DEPENDENCIES:
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - record (from `.symlinks/plugins/record/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - sound_generator (from `.symlinks/plugins/sound_generator/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AudioKit
 
 EXTERNAL SOURCES:
   audio_waveforms:
@@ -40,19 +54,23 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/record/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  sound_generator:
+    :path: ".symlinks/plugins/sound_generator/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   audio_waveforms: cd736909ebc6b6a164eb74701d8c705ce3241e1c
+  AudioKit: 57cc61d708f085763a031e5c3f87adae21dc4b59
   audioplayers: 455322b54050b30ea4b1af7cd9e9d105f74efa8c
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   record: cae05d8dd3cdb1dea3511b20e5a5811a1ae00d0d
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  sound_generator: 9dbd7c16f7023add0e875c150c6e64ed47a71b6a
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
 
-PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
+PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
 
 COCOAPODS: 1.11.2
