@@ -61,6 +61,35 @@ class _PlotScreenState extends State<PlotScreen> {
   _PlotScreenState(this.title);
 
   @override
+  void initState() {
+    super.initState();
+    isPlaying = false;
+
+    SoundGenerator.init(sampleRate);
+
+    SoundGenerator.onIsPlayingChanged.listen((value) {
+      setState(() {
+        isPlaying = value;
+      });
+    });
+
+    SoundGenerator.onOneCycleDataHandler.listen((value) {
+      setState(() {
+        oneCycleData = value;
+      });
+    });
+
+    SoundGenerator.setAutoUpdateOneCycleSample(true);
+    SoundGenerator.refreshOneCycleData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    SoundGenerator.release();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

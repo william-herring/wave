@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wave/screens/home_screen.dart';
+import 'package:wave/screens/learn_screen.dart';
 import 'package:wave/screens/studio_screen.dart';
 import '../adaptive/adaptive_icons.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +21,7 @@ class _AppViewState extends State<AppView> {
   @override
   void initState() {
     super.initState();
-   _pageController = PageController(initialPage: page);
+    _pageController = PageController(initialPage: page);
   }
 
   List<Widget> buildNavigationItems() {
@@ -29,8 +30,8 @@ class _AppViewState extends State<AppView> {
     final pages = [
       ['Home', AdaptiveIcons.home],
       ['Studio', AdaptiveIcons.mic],
-      ['Library', AdaptiveIcons.library],
       ['Learn', AdaptiveIcons.book],
+      ['About', AdaptiveIcons.info],
     ];
 
     for (int i = 0; i < pages.length; i++) {
@@ -95,7 +96,8 @@ class _AppViewState extends State<AppView> {
             physics: const NeverScrollableScrollPhysics(),
             children: const [
               HomeScreen(),
-              StudioScreen()
+              StudioScreen(),
+              LearnScreen(),
             ],
         ),
     );
