@@ -128,23 +128,25 @@ class _PlotScreenState extends State<PlotScreen> {
                   color: Colors.red,
                 ),
                 const SizedBox(height: 5),
-                CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.lightBlueAccent,
-                    child: IconButton(
-                        icon: Icon(
-                            isPlaying ? Icons.stop : Icons.play_arrow),
-                        onPressed: () {
-                          isPlaying
-                              ? SoundGenerator.stop()
-                              : SoundGenerator.play();
-                        })),
+                Container(
+                  padding: const EdgeInsets.all(4.0),
+                  margin: const EdgeInsets.only(right: 6),
+                  child: IconButton(onPressed: () {
+                    isPlaying
+                        ? SoundGenerator.stop()
+                        : SoundGenerator.play();
+                  }, icon: Icon(isPlaying? AdaptiveIcons.pause : AdaptiveIcons.play)),
+                  decoration: BoxDecoration(
+                    color: Colors.red[400],
+                    borderRadius: BorderRadius.circular(22),
+                  ),
+                ),
                 const SizedBox(height: 5),
                 const Divider(
                   color: Colors.red,
                 ),
                 const SizedBox(height: 5),
-                const Text("Wave Form"),
+                const Text("Wave type"),
                 Center(
                     child: DropdownButton<waveTypes>(
                         value: waveType,
@@ -158,8 +160,7 @@ class _PlotScreenState extends State<PlotScreen> {
                         waveTypes.values.map((waveTypes classType) {
                           return DropdownMenuItem<waveTypes>(
                               value: classType,
-                              child: Text(
-                                  classType.toString().split('.').last));
+                              child: Text(classType.toString().split('.').last, style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor)));
                         }).toList())),
                 const SizedBox(height: 5),
                 const Divider(
