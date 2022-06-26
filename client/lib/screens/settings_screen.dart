@@ -76,7 +76,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
-          ])
+              const Text('Preferences', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 32.0)),
+              const SizedBox(height: 16.0),
+              Center(
+                child: InkWell(
+                  onTap: () { prefs.clear(); Navigator.pushReplacementNamed(context, '/setup'); },
+                  borderRadius: BorderRadius.circular(360),
+                  child: Ink(
+                    padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+                    child: const Text(
+                      'Clear app data',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.red[500],
+                        borderRadius: BorderRadius.circular(360)
+                    ),
+                  ),
+                ),
+              ),
+            ])
         )
     );
   }
