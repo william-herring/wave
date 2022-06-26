@@ -13,4 +13,5 @@ class AdaptiveIcons {
   static IconData edit = Platform.isAndroid? Icons.edit : CupertinoIcons.pencil;
   static IconData play = Platform.isAndroid? Icons.play_arrow : CupertinoIcons.play_arrow_solid;
   static IconData pause = Platform.isAndroid? Icons.pause : CupertinoIcons.pause_fill;
+  static IconData settings = Platform.isAndroid? Icons.settings : CupertinoIcons.settings;
 }

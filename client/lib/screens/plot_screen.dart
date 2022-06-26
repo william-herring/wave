@@ -149,6 +149,7 @@ class _PlotScreenState extends State<PlotScreen> {
                 const Text("Wave type"),
                 Center(
                     child: DropdownButton<waveTypes>(
+                      dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                         value: waveType,
                         onChanged: (waveTypes? newValue) {
                           setState(() {
@@ -160,7 +161,7 @@ class _PlotScreenState extends State<PlotScreen> {
                         waveTypes.values.map((waveTypes classType) {
                           return DropdownMenuItem<waveTypes>(
                               value: classType,
-                              child: Text(classType.toString().split('.').last, style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor)));
+                              child: Text(classType.toString().split('.').last));
                         }).toList())),
                 const SizedBox(height: 5),
                 const Divider(

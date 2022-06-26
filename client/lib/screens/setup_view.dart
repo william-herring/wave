@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 
 class SetupView extends StatefulWidget {
@@ -13,17 +12,6 @@ class SetupView extends StatefulWidget {
 class _SetupViewState extends State<SetupView> {
   bool dyslexiaMode = false;
   String theme = getThemeMode() == ThemeMode.light? 'light' : 'dark';
-  late final SharedPreferences prefs;
-
-  @override
-  void initState() {
-    super.initState();
-    initPrefs();
-  }
-
-  void initPrefs() async {
-    prefs = await SharedPreferences.getInstance();
-  }
 
   Widget buildBottomPageIndicator(int size, int page) {
     List<Widget> result = [];

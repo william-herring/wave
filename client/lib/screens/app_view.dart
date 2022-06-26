@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wave/screens/home_screen.dart';
 import 'package:wave/screens/learn_screen.dart';
+import 'package:wave/screens/settings_screen.dart';
 import 'package:wave/screens/studio_screen.dart';
 import '../adaptive/adaptive_icons.dart';
 import 'package:flutter/services.dart';
@@ -31,7 +32,7 @@ class _AppViewState extends State<AppView> {
       ['Home', AdaptiveIcons.home],
       ['Studio', AdaptiveIcons.mic],
       ['Learn', AdaptiveIcons.book],
-      ['About', AdaptiveIcons.info],
+      ['Settings', AdaptiveIcons.settings],
     ];
 
     for (int i = 0; i < pages.length; i++) {
@@ -98,6 +99,7 @@ class _AppViewState extends State<AppView> {
               HomeScreen(),
               StudioScreen(),
               LearnScreen(),
+              SettingsScreen()
             ],
         ),
     );
