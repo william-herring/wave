@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wave/dev/tool/clear_data.dart';
 import 'package:wave/screens/app_view.dart';
 import 'package:wave/screens/setup_view.dart';
 

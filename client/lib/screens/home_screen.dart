@@ -1,6 +1,5 @@
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
-import 'package:wave/adaptive/adaptive_icons.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class HomeScreen extends StatelessWidget {
           children: const [
             Text('Quick actions', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 32.0)),
             SizedBox(height: 16.0),
-            QuickRecordItem()
+            QuickRecordItem(),
           ]
         ),
       )

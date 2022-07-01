@@ -4,11 +4,11 @@ import 'package:sound_generator/sound_generator.dart';
 import 'package:sound_generator/waveTypes.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
 import '../adaptive/adaptive_icons.dart';
+import 'app_view.dart';
 
-class MyPainter extends CustomPainter {
+class WavePainter extends CustomPainter {
   final List<int> oneCycleData;
-
-  MyPainter(this.oneCycleData);
+  WavePainter(this.oneCycleData);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -25,14 +25,14 @@ class MyPainter extends CustomPainter {
     }
 
     final paint = Paint()
-      ..color = Colors.red.shade400
+      ..color = Colors.white
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.round;
     canvas.drawPoints(PointMode.polygon, maxPoints, paint);
   }
 
   @override
-  bool shouldRepaint(MyPainter oldDelegate) {
+  bool shouldRepaint(WavePainter oldDelegate) {
     if (oneCycleData != oldDelegate.oneCycleData) {
       return true;
     }
@@ -96,7 +96,7 @@ class _PlotScreenState extends State<PlotScreen> {
         title: Text(title),
         leading: IconButton(icon: Icon(Icons.adaptive.more), onPressed: () {}),
         actions: [
-          IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () => showAdaptiveAlertDialog(context, () {}))
+          IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () => showAdaptiveAlertDialog(context, () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AppView(page: 1)))))
         ],
       ),
       body: Padding(
@@ -108,21 +108,17 @@ class _PlotScreenState extends State<PlotScreen> {
                 Container(
                     height: 100,
                     width: double.infinity,
-                    color: Colors.white54,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 5,
                       vertical: 0,
                     ),
                     child: oneCycleData != null
                         ? CustomPaint(
-                      painter: MyPainter(oneCycleData!),
+                      size: MediaQuery.of(context).size,
+                      painter: WavePainter(oneCycleData!),
                     )
                         : Container()),
                 const SizedBox(height: 2),
-                Text("A Cycle Data Length is " +
-                    (sampleRate / frequency).round().toString() +
-                    " on sample rate " +
-                    sampleRate.toString()),
                 const SizedBox(height: 5),
                 const Divider(
                   color: Colors.red,
@@ -135,6 +131,7 @@ class _PlotScreenState extends State<PlotScreen> {
                     isPlaying
                         ? SoundGenerator.stop()
                         : SoundGenerator.play();
+                    print(oneCycleData.toString()); // TODO: oneCycleData is always null
                   }, icon: Icon(isPlaying? AdaptiveIcons.pause : AdaptiveIcons.play)),
                   decoration: BoxDecoration(
                     color: Colors.red[400],
