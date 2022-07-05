@@ -1,5 +1,8 @@
-import 'dart:ui';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:http/http.dart';
 import 'package:sound_generator/sound_generator.dart';
 import 'package:sound_generator/waveTypes.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
@@ -7,37 +10,23 @@ import '../adaptive/adaptive_icons.dart';
 import 'app_view.dart';
 
 class WavePainter extends CustomPainter {
-  final List<int> oneCycleData;
-  WavePainter(this.oneCycleData);
-
   @override
   void paint(Canvas canvas, Size size) {
-    var i = 0;
-    List<Offset> maxPoints = [];
-
-    final t = size.width / (oneCycleData.length - 1);
-    for (var _i = 0, _len = oneCycleData.length; _i < _len; _i++) {
-      maxPoints.add(Offset(
-          t * i,
-          size.height / 2 -
-              oneCycleData[_i].toDouble() / 32767.0 * size.height / 2));
-      i++;
-    }
+    double maxAmplitude = 1;
+    double frequency = 20;
+    double getY(time) => maxAmplitude * 0.01 * sin(2 * pi * frequency * time); // Returns Y value at any given point in time. See: https://en.wikipedia.org/wiki/Sine_wave
+    
+    print(getY(1));
 
     final paint = Paint()
       ..color = Colors.white
-      ..strokeWidth = 1
+      ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
-    canvas.drawPoints(PointMode.polygon, maxPoints, paint);
+    canvas.drawLine(const Offset(0, 0), Offset(size.width, size.height), paint);
   }
 
   @override
-  bool shouldRepaint(WavePainter oldDelegate) {
-    if (oneCycleData != oldDelegate.oneCycleData) {
-      return true;
-    }
-    return false;
-  }
+  bool shouldRepaint(WavePainter oldDelegate) => false;
 }
 
 class PlotScreen extends StatefulWidget {
@@ -53,7 +42,7 @@ class _PlotScreenState extends State<PlotScreen> {
   bool isPlaying = false;
   double frequency = 20;
   double balance = 0;
-  double volume = 1;
+  double amplitude = 1;
   waveTypes waveType = waveTypes.SINUSOIDAL;
   int sampleRate = 96000;
   List<int>? oneCycleData;
@@ -112,12 +101,10 @@ class _PlotScreenState extends State<PlotScreen> {
                       horizontal: 5,
                       vertical: 0,
                     ),
-                    child: oneCycleData != null
-                        ? CustomPaint(
+                    child: CustomPaint(
                       size: MediaQuery.of(context).size,
-                      painter: WavePainter(oneCycleData!),
-                    )
-                        : Container()),
+                      painter: WavePainter(),
+                    )),
                 const SizedBox(height: 2),
                 const SizedBox(height: 5),
                 const Divider(
@@ -131,7 +118,6 @@ class _PlotScreenState extends State<PlotScreen> {
                     isPlaying
                         ? SoundGenerator.stop()
                         : SoundGenerator.play();
-                    print(oneCycleData.toString()); // TODO: oneCycleData is always null
                   }, icon: Icon(isPlaying? AdaptiveIcons.pause : AdaptiveIcons.play)),
                   decoration: BoxDecoration(
                     color: Colors.red[400],
@@ -226,7 +212,7 @@ class _PlotScreenState extends State<PlotScreen> {
                           )
                         ])),
                 const SizedBox(height: 5),
-                const Text("Volume"),
+                const Text("Amplitude"),
                 SizedBox(
                     width: double.infinity,
                     height: 40,
@@ -238,18 +224,18 @@ class _PlotScreenState extends State<PlotScreen> {
                             flex: 2,
                             child: Center(
                                 child:
-                                Text(volume.toStringAsFixed(2))),
+                                Text(amplitude.toStringAsFixed(2))),
                           ),
                           Expanded(
                             flex: 8,
                             child: Slider(
                                 min: 0,
                                 max: 1,
-                                value: volume,
+                                value: amplitude,
                                 onChanged: (_value) {
                                   setState(() {
-                                    volume = _value.toDouble();
-                                    SoundGenerator.setVolume(volume);
+                                    amplitude = _value.toDouble();
+                                    SoundGenerator.setVolume(amplitude);
                                   });
                                 }),
                           )

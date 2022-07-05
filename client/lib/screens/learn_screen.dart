@@ -22,6 +22,7 @@ class LearnScreen extends StatelessWidget {
                     children: [
                       ResourceItem(title: 'Measuring sound', source: 'sciencelearn.org.nz', thumbnail: Image.network('https://static.sciencelearn.org.nz/images/images/000/000/605/original/Graphs-of-sound-waves20151209_v2.jpg?1568601846', scale: 1.8)),
                       ResourceItem(title: "What's the science of sound?", source: 'NASA', thumbnail: Image.network('https://i.ytimg.com/vi/G-KGTambZtI/maxresdefault.jpg')),
+                      ResourceItem(title: "Sound waves", source: 'PASCO', thumbnail: Image.network('https://www.pasco.com/media/files/static/guides/sound-direction-of-sound-waves-01.png')),
                     ],
                   ),
                 )
@@ -40,28 +41,31 @@ class ResourceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.only(bottom: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-          Text(source, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w200, color: Theme.of(context).primaryColor.withOpacity(0.7))),
-          Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Center(
-                  child: thumbnail
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.only(bottom: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+            Text(source, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w200, color: Theme.of(context).primaryColor.withOpacity(0.7))),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Center(
+                    child: thumbnail
+                ),
               ),
-            ),
-          )
-        ],
-      ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(22),
-          color: Colors.black.withOpacity(0.5)
+            )
+          ],
+        ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            color: Colors.black.withOpacity(0.5)
+        ),
       ),
     );
   }
