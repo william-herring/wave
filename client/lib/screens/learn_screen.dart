@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LearnScreen extends StatelessWidget {
   const LearnScreen({Key? key}) : super(key: key);
@@ -20,9 +21,9 @@ class LearnScreen extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
-                      ResourceItem(title: 'Measuring sound', source: 'sciencelearn.org.nz', thumbnail: Image.network('https://static.sciencelearn.org.nz/images/images/000/000/605/original/Graphs-of-sound-waves20151209_v2.jpg?1568601846', scale: 1.8)),
-                      ResourceItem(title: "What's the science of sound?", source: 'NASA', thumbnail: Image.network('https://i.ytimg.com/vi/G-KGTambZtI/maxresdefault.jpg')),
-                      ResourceItem(title: "Sound waves", source: 'PASCO', thumbnail: Image.network('https://www.pasco.com/media/files/static/guides/sound-direction-of-sound-waves-01.png')),
+                      ResourceItem(url: 'https://www.sciencelearn.org.nz/resources/573-measuring-sound', title: 'Measuring sound', source: 'sciencelearn.org.nz', thumbnail: Image.network('https://static.sciencelearn.org.nz/images/images/000/000/605/original/Graphs-of-sound-waves20151209_v2.jpg?1568601846', scale: 1.8)),
+                      ResourceItem(url: 'https://www.nasa.gov/specials/X59/science-of-sound.html', title: "What's the science of sound?", source: 'NASA', thumbnail: Image.network('https://i.ytimg.com/vi/G-KGTambZtI/maxresdefault.jpg')),
+                      ResourceItem(url: 'https://www.pasco.com/products/guides/sound-waves', title: "Sound waves", source: 'PASCO', thumbnail: Image.network('https://www.pasco.com/media/files/static/guides/sound-direction-of-sound-waves-01.png')),
                     ],
                   ),
                 )
@@ -34,15 +35,16 @@ class LearnScreen extends StatelessWidget {
 }
 
 class ResourceItem extends StatelessWidget {
+  final String url;
   final String title;
   final String source;
   final Image thumbnail;
-  const ResourceItem({Key? key, required this.title, required this.source, required this.thumbnail}) : super(key: key);
+  const ResourceItem({Key? key, required this.url, required this.title, required this.source, required this.thumbnail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => launchUrl(Uri.parse(url)),
       child: Container(
         padding: const EdgeInsets.all(16.0),
         margin: const EdgeInsets.only(bottom: 16.0),
