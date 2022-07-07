@@ -9,14 +9,16 @@ import '../adaptive/adaptive_icons.dart';
 import 'app_view.dart';
 
 class WavePainter extends CustomPainter {
-  double maxAmplitude;
-  double frequency;
+  double maxAmplitude; // Amplitude is the highest point a wave can reach to. It is also referred to as the volume of a sound.
+  double frequency; // Frequency is the rate at which a cycle will repeat itself.
+  double balance; // Balance can be used to shift the wave horizontally.
+  Color waveColor;
 
-  WavePainter(this.maxAmplitude, this.frequency);
+  WavePainter(this.maxAmplitude, this.frequency, this.balance, this.waveColor);
 
   @override
   void paint(Canvas canvas, Size size) {
-    double getY(time) => maxAmplitude * sin(2 * pi * frequency * time); // Returns Y value at any given point in time. See: https://en.wikipedia.org/wiki/Sine_wave
+    double getY(time) => maxAmplitude * sin(2 * pi * frequency * time + balance); // Returns Y value at any given point in time. See: https://en.wikipedia.org/wiki/Sine_wave
     List<Offset> points = [];
 
     for (double t = 0; t <= size.width / 10000; t += 0.0001) {
@@ -24,7 +26,7 @@ class WavePainter extends CustomPainter {
     }
 
     final paint = Paint()
-      ..color = Colors.white
+      ..color = waveColor
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
     canvas.drawPoints(PointMode.polygon, points, paint);
@@ -108,7 +110,7 @@ class _PlotScreenState extends State<PlotScreen> {
                     ),
                     child: CustomPaint(
                       size: MediaQuery.of(context).size,
-                      painter: WavePainter(amplitude, frequency),
+                      painter: WavePainter(amplitude, frequency, balance, Theme.of(context).primaryColor),
                     )),
                 const SizedBox(height: 2),
                 const SizedBox(height: 5),
