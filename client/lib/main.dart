@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wave/screens/app_view.dart';
 import 'package:wave/screens/setup_view.dart';
+import 'dev/tool/clear_data.dart';
 
 late final SharedPreferences prefs;
 bool? completedIntro = false;
@@ -9,7 +10,7 @@ bool? completedIntro = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Uncomment below to clear all user data/preferences
-  // clearData();
+  clearData();
   prefs = await SharedPreferences.getInstance();
   completedIntro = prefs.getBool('completedIntro');
   completedIntro ??= false;

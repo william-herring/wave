@@ -1,8 +1,7 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:http/http.dart';
 import 'package:sound_generator/sound_generator.dart';
 import 'package:sound_generator/waveTypes.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
@@ -10,19 +9,25 @@ import '../adaptive/adaptive_icons.dart';
 import 'app_view.dart';
 
 class WavePainter extends CustomPainter {
+  double maxAmplitude;
+  double frequency;
+
+  WavePainter(this.maxAmplitude, this.frequency);
+
   @override
   void paint(Canvas canvas, Size size) {
-    double maxAmplitude = 1;
-    double frequency = 20;
-    double getY(time) => maxAmplitude * 0.01 * sin(2 * pi * frequency * time); // Returns Y value at any given point in time. See: https://en.wikipedia.org/wiki/Sine_wave
-    
-    print(getY(1));
+    double getY(time) => maxAmplitude * sin(2 * pi * frequency * time); // Returns Y value at any given point in time. See: https://en.wikipedia.org/wiki/Sine_wave
+    List<Offset> points = [];
+
+    for (double t = 0; t <= size.width / 10000; t += 0.0001) {
+      points.add(Offset(t * 10000, getY(t) * 100));
+    }
 
     final paint = Paint()
       ..color = Colors.white
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
-    canvas.drawLine(const Offset(0, 0), Offset(size.width, size.height), paint);
+    canvas.drawPoints(PointMode.polygon, points, paint);
   }
 
   @override
@@ -103,7 +108,7 @@ class _PlotScreenState extends State<PlotScreen> {
                     ),
                     child: CustomPaint(
                       size: MediaQuery.of(context).size,
-                      painter: WavePainter(),
+                      painter: WavePainter(amplitude, frequency),
                     )),
                 const SizedBox(height: 2),
                 const SizedBox(height: 5),
