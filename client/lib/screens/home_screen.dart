@@ -1,5 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
+
+import 'create_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,10 +18,32 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const [
-            Text('Quick actions', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 32.0)),
-            SizedBox(height: 16.0),
-            QuickRecordItem(),
+          children: [
+            const Text('Quick actions', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 32.0)),
+            const SizedBox(height: 16.0),
+            const QuickRecordItem(),
+            const SizedBox(height: 16.0),
+            OpenContainer<String>(
+                transitionDuration: const Duration(milliseconds: 500),
+                openBuilder: (_, closeContainer) => CreateScreen(closeContainer: closeContainer),
+                closedColor: Colors.transparent,
+                closedElevation: 0,
+                tappable: false,
+                closedBuilder: (_, openContainer) => InkWell(
+                    onTap: () => openContainer(),
+                    child: Container(
+                      padding: const EdgeInsets.all(24),
+                      width: MediaQuery.of(context).size.width - 40,
+                      child: Center(
+                        child: Icon(Icons.add, size: 32.0, color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(22),
+                      ),
+                    )
+                )
+            )
           ]
         ),
       )

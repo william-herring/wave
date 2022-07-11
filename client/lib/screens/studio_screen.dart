@@ -36,12 +36,12 @@ class StudioScreen extends StatelessWidget {
                 child: Container(
                   width: 200,
                   height: 200,
-                  child: const Center(
-                    child: Icon(Icons.add, size: 32.0),
+                  child: Center(
+                    child: Icon(Icons.add, size: 32.0, color: Theme.of(context).primaryColor.withOpacity(0.5)),
                   ),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(22)),
-                    color: Theme.of(context).primaryColor == Colors.white? Colors.white10 : Colors.grey[300],
+                    color: Colors.black.withOpacity(0.5),
                   ),
                 ),
               ),
