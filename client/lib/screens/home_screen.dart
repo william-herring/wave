@@ -71,7 +71,8 @@ class _QuickRecordItemState extends State<QuickRecordItem> {
           child: Text('Tap to start/stop recording', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.5))),
         ) : AudioWaveforms(
           size: const Size(double.infinity, 80.0),
-          waveStyle: const WaveStyle(
+          waveStyle: WaveStyle(
+            waveColor: Theme.of(context).primaryColor == Colors.white? Colors.blueGrey : Colors.grey,
             extendWaveform: true,
             showMiddleLine: false,
             waveThickness: 4,
