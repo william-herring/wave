@@ -39,23 +39,26 @@ class WavePainter extends CustomPainter {
 
 class PlotScreen extends StatefulWidget {
   final String title;
-  const PlotScreen({Key? key, required this.title}) : super(key: key);
+  final double frequency;
+  final double balance;
+  final double amplitude;
+  const PlotScreen({Key? key, required this.title, this.frequency = 20, this.balance = 0, this.amplitude = 1}) : super(key: key);
 
   @override
-  _PlotScreenState createState() => _PlotScreenState(title);
+  _PlotScreenState createState() => _PlotScreenState(title, frequency, balance, amplitude);
 }
 
 class _PlotScreenState extends State<PlotScreen> {
   String title;
   bool isPlaying = false;
-  double frequency = 20;
-  double balance = 0;
-  double amplitude = 1;
+  double frequency;
+  double balance;
+  double amplitude;
   waveTypes waveType = waveTypes.SINUSOIDAL;
   int sampleRate = 96000;
   List<int>? oneCycleData;
 
-  _PlotScreenState(this.title);
+  _PlotScreenState(this.title, this.frequency, this.balance, this.amplitude);
 
   @override
   void initState() {

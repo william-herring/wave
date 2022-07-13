@@ -4,17 +4,21 @@ import 'package:wave/adaptive/adaptive_icons.dart';
 import 'package:animations/animations.dart';
 import 'package:wave/main.dart';
 import 'package:wave/screens/create_screen.dart';
+import 'package:wave/screens/plot_screen.dart';
 import 'package:wave/screens/record_screen.dart';
 
 class StudioScreen extends StatelessWidget {
   const StudioScreen({Key? key}) : super(key: key);
 
-  Widget buildDraftsList() {
+  Widget buildDraftsList(BuildContext context) {
     final waves = prefs.getStringList('waves');
     final List<Widget> drafts = [];
 
     waves?.forEach((element) => drafts.add(
-        ListTile(onTap: () {}, title: Text(jsonDecode(element)['title'])))
+        ListTile(onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (BuildContext context) => PlotScreen(title: jsonDecode(element)['title'], frequency: jsonDecode(element)['frequency'],
+              balance: jsonDecode(element)['balance'], amplitude: jsonDecode(element)['amplitude']),
+        )), title: Text(jsonDecode(element)['title'])))
     );
 
     return waves == null? Container() : ListView(
@@ -63,7 +67,7 @@ class StudioScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            buildDraftsList()
+            buildDraftsList(context)
           ],
         ),
       ),
