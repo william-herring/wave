@@ -1,10 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:sound_generator/sound_generator.dart';
 import 'package:sound_generator/waveTypes.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
+import 'package:wave/main.dart';
 import '../adaptive/adaptive_icons.dart';
 import 'app_view.dart';
 
@@ -92,24 +93,34 @@ class _PlotScreenState extends State<PlotScreen> {
         title: Text(title),
         leading: IconButton(icon: Icon(Icons.adaptive.more), onPressed: () {}),
         actions: [
-          IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () => showAdaptiveAlertDialog(context, () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AppView(page: 1)))))
-        ],
+          IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () {SoundGenerator.stop(); showAdaptiveAlertDialog(context, () {
+            final waves = prefs.getStringList('waves');
+            prefs.setStringList('waves', waves == null? [] : waves + [jsonEncode({
+              'title': title,
+              'frequency': frequency,
+              'balance': balance,
+              'amplitude': amplitude
+            })]);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AppView(page: 1)));
+          });})
+      ],
       ),
       body: Padding(
-          padding: const EdgeInsets.all(26.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    height: 100,
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 0,
-                    ),
-                    child: CustomPaint(
-                      size: MediaQuery.of(context).size,
+      padding: const EdgeInsets.all(26.0),
+      child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+      Container(
+      height: 100,
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+      horizontal: 5,
+      vertical: 0,
+      ),
+      child: CustomPaint(
+      size: MediaQuery.of(
+      context).size,
                       painter: WavePainter(amplitude, frequency, balance, Theme.of(context).primaryColor),
                     )),
                 const SizedBox(height: 2),
