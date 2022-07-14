@@ -15,10 +15,11 @@ Wave is an app for viewing sound in waveforms (commonly known as sound waves) an
 Wave is envisioned as a highly-capable sound editor and sampler. The app is built around the concept of waveforms to represent sound visually. The two key features of the app involve both the recording of sound waves, as well as creating sound waves with the use of a visual editor. Aimed to appeal to the scientific/physics community, 'waves' may be shared online and cloned by other users to allow for the scientific community to analyse the same wave(s) and perform individual experiments.
 ### Screenshots
 <img src='https://user-images.githubusercontent.com/73984595/170813540-ba8866d5-88c8-44b9-b09b-f6c4ccc47854.png' height='524'></img>
-<img src='https://user-images.githubusercontent.com/73984595/170813555-94be63a9-b471-45d1-a970-d736d7a907ea.png' height='524'></img>
+<img src='https://user-images.githubusercontent.com/73984595/178936028-2c72bfec-35d2-48e7-b662-ecc25c33edaf.png' height='524'></img>
 <img src='https://user-images.githubusercontent.com/73984595/170814207-79c21212-3141-4a44-b82c-6a2ec470327a.png' height='524'></img>
 <img src='https://user-images.githubusercontent.com/73984595/170814236-9906f833-90cd-4582-b090-b104826d1ec8.png' height='524'></img>
 <img src='https://user-images.githubusercontent.com/73984595/170814245-b95d4c9f-3794-4b46-b581-110eee7d6858.png' height='524'></img>
+<img src='https://user-images.githubusercontent.com/73984595/178935282-3b42bbdf-23ae-4f57-a09b-dbcf44d5bdf1.png' height='524'></img>
 
 ## Science
 Sound travels in mechanical waves that are formed from the various frequencies in which particles vibrate. <br><br>
