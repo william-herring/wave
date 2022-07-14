@@ -18,7 +18,10 @@ class StudioScreen extends StatelessWidget {
         ListTile(onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (BuildContext context) => PlotScreen(title: jsonDecode(element)['title'], frequency: jsonDecode(element)['frequency'],
               balance: jsonDecode(element)['balance'], amplitude: jsonDecode(element)['amplitude']),
-        )), title: Text(jsonDecode(element)['title'])))
+        )), title: Text(jsonDecode(element)['title']),
+            subtitle: Text('Graph', style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.6))),
+            trailing: IconButton(icon: Icon(Icons.more_vert, color: Theme.of(context).primaryColor), onPressed: () {}),
+        ))
     );
 
     return waves == null? Container() : ListView(
