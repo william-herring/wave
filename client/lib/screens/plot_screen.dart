@@ -98,7 +98,12 @@ class _PlotScreenState extends State<PlotScreen> {
         actions: [
           IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () {SoundGenerator.stop(); showAdaptiveAlertDialog(context, () {
             final waves = prefs.getStringList('waves');
-            prefs.setStringList('waves', waves == null? [] : waves + [jsonEncode({
+            prefs.setStringList('waves', waves == null? [jsonEncode({
+              'title': title,
+              'frequency': frequency,
+              'balance': balance,
+              'amplitude': amplitude
+            })] : waves + [jsonEncode({
               'title': title,
               'frequency': frequency,
               'balance': balance,
