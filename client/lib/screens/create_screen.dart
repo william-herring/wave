@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wave/adaptive/adaptive_icons.dart';
+import 'package:wave/main.dart';
 import 'package:wave/screens/plot_screen.dart';
 import 'package:wave/screens/record_screen.dart';
 
@@ -17,6 +20,22 @@ class _CreateScreenState extends State<CreateScreen> {
   String mode = 'record';
   String title = '';
   _CreateScreenState(this.closeContainer);
+
+  String getUntitled() {
+    if (mode == 'plot') {
+      String u = 'Untitled';
+      final data = prefs.getStringList('waves');
+      int i = 0;
+      data?.forEach((element) {
+        if (u == jsonDecode(element)['title']) {
+          i += 1;
+          u = 'Unititled (${i})';
+        }
+      });
+      return u;
+    }
+    return 'Untitled';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +92,7 @@ class _CreateScreenState extends State<CreateScreen> {
                   mode == 'record'? Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (BuildContext context) => RecordScreen(title: title.isEmpty? 'Untitled' : title),
                   )) : Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (BuildContext context) => PlotScreen(title: title.isEmpty? 'Untitled' : title),
+                    builder: (BuildContext context) => PlotScreen(title: title.isEmpty? getUntitled() : title),
                   ));
                 },
                 borderRadius: BorderRadius.circular(360),
