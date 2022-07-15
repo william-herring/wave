@@ -98,17 +98,25 @@ class _PlotScreenState extends State<PlotScreen> {
         actions: [
           IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () {SoundGenerator.stop(); showAdaptiveAlertDialog(context, () {
             final waves = prefs.getStringList('waves');
-            prefs.setStringList('waves', waves == null? [jsonEncode({
+            final data = jsonEncode({
               'title': title,
               'frequency': frequency,
               'balance': balance,
               'amplitude': amplitude
-            })] : waves + [jsonEncode({
-              'title': title,
-              'frequency': frequency,
-              'balance': balance,
-              'amplitude': amplitude
-            })]);
+            });
+            bool save = false;
+            waves?.forEach((element) {
+              if (jsonDecode(element)['title'] == title) {
+                waves[waves.indexOf(element)] = data;
+                prefs.setStringList('waves', waves);
+                save = true;
+                return;
+              }
+            });
+            if (!save) {
+              prefs.setStringList(
+                  'waves', waves == null ? [data] : waves + [data]);
+            }
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AppView(page: 1)));
           });})
       ],
@@ -116,19 +124,19 @@ class _PlotScreenState extends State<PlotScreen> {
       body: Padding(
       padding: const EdgeInsets.all(26.0),
       child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-      Container(
-      height: 100,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-      horizontal: 5,
-      vertical: 0,
-      ),
-      child: CustomPaint(
-      size: MediaQuery.of(
-      context).size,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+        Container(
+          height: 100,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 5,
+            vertical: 0,
+          ),
+          child: CustomPaint(
+          size: MediaQuery.of(
+            context).size,
                       painter: WavePainter(amplitude, frequency, balance, Theme.of(context).primaryColor),
                     )),
                 const SizedBox(height: 2),
