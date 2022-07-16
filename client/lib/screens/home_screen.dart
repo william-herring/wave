@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import 'create_screen.dart';
 
@@ -43,6 +44,50 @@ class HomeScreen extends StatelessWidget {
                       ),
                     )
                 )
+            ),
+            const SizedBox(height: 16.0),
+            const Text('About this app', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 32.0)),
+            const SizedBox(height: 16.0),
+            Center(
+              child: Column(
+                children: [
+                  Text('Wave was created for the Science Talent Search Victoria 2022 by William Herring. '
+                      'It aims to demonstrate how sound can be visualised as waveforms. There are two key features to this app; the sound wave builder, and the recorder. '
+                      'To find out more about Wave, you can visit the website or the GitHub repository:', style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.7))),
+                  const SizedBox(height: 8.0),
+                  InkWell(
+                    onTap: () => launchUrlString('https://william-herring.github.io/wave'),
+                    borderRadius: BorderRadius.circular(360),
+                    child: Ink(
+                      padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+                      child: const Text(
+                        'Website',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.red[500],
+                          borderRadius: BorderRadius.circular(360)
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                  InkWell(
+                    onTap: () => launchUrlString('https://github.com/william-herring/wave'),
+                    borderRadius: BorderRadius.circular(360),
+                    child: Ink(
+                      padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+                      child: const Text(
+                        'GitHub',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.red[500],
+                          borderRadius: BorderRadius.circular(360)
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             )
           ]
         ),
