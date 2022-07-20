@@ -163,7 +163,7 @@ class _PlotScreenState extends State<PlotScreen> {
                   color: Colors.red,
                 ),
                 const SizedBox(height: 5),
-                const Text("Frequency"),
+                const Text("Frequency", style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(
                     width: double.infinity,
                     height: 40,
@@ -176,7 +176,7 @@ class _PlotScreenState extends State<PlotScreen> {
                             child: Center(
                                 child: Text(
                                     frequency.toStringAsFixed(2) +
-                                        " Hz")),
+                                        " Hz", textAlign: TextAlign.center)),
                           ),
                           Expanded(
                             flex: 8, // 60%
@@ -194,7 +194,7 @@ class _PlotScreenState extends State<PlotScreen> {
                           )
                         ])),
                 const SizedBox(height: 5),
-                const Text("Balance"),
+                const Text("Balance", style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(
                     width: double.infinity,
                     height: 40,
@@ -224,7 +224,7 @@ class _PlotScreenState extends State<PlotScreen> {
                           )
                         ])),
                 const SizedBox(height: 5),
-                const Text("Amplitude"),
+                const Text("Amplitude", style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(
                     width: double.infinity,
                     height: 40,
