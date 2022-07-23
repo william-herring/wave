@@ -41,7 +41,7 @@ class _AppViewState extends State<AppView> {
           onTap: () {
             setState(() => page = i);
             _pageController.jumpToPage(i);
-            HapticFeedback.lightImpact();
+            HapticFeedback.mediumImpact();
             Navigator.pop(context);
           },
           leading: Icon(pages[i][1] as IconData, color: Colors.red[400]),

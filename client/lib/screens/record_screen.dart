@@ -15,7 +15,10 @@ class RecordScreen extends StatefulWidget {
 class _RecordScreenState extends State<RecordScreen> {
   String title;
   late final RecorderController recorderController;
+  late final PlayerController playerController;
   bool isRecording = false;
+  bool isPlaying = false;
+  bool paused = false;
   List<double> waveData = [];
   _RecordScreenState(this.title);
 
@@ -23,6 +26,7 @@ class _RecordScreenState extends State<RecordScreen> {
   void initState() {
     super.initState();
     recorderController = RecorderController();
+    playerController = PlayerController();
   }
 
   @override
@@ -43,11 +47,36 @@ class _RecordScreenState extends State<RecordScreen> {
     } else {
       recorderController.refresh();
       await recorderController.record();
+      await playerController.stopPlayer();
+      setState(() {
+        isPlaying = false;
+      });
     }
   }
 
-  void playRecording() async {
-    await recorderController.pause();
+  void togglePlay() async {
+    if (isPlaying) {
+      await playerController.pausePlayer();
+      setState(() {
+        isPlaying = false;
+        paused = true;
+      });
+      return;
+    }
+    if (paused) {
+      await playerController.startPlayer();
+      setState(() {
+        isPlaying = true;
+        paused = false;
+      });
+    }
+    var path = await recorderController.stop(false);
+    path = path?.split('file://')[1];
+    await playerController.preparePlayer(path!);
+    await playerController.startPlayer();
+    setState(() {
+      isPlaying = true;
+    });
   }
 
   @override
@@ -93,7 +122,7 @@ class _RecordScreenState extends State<RecordScreen> {
               Container(
                 padding: const EdgeInsets.all(4.0),
                 margin: const EdgeInsets.only(right: 6),
-                child: IconButton(onPressed: () => playRecording(), icon: Icon(AdaptiveIcons.play)),
+                child: IconButton(onPressed: () => togglePlay(), icon: Icon(isPlaying? AdaptiveIcons.pause : AdaptiveIcons.play)),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(22),

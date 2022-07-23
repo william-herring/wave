@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wave/adaptive/adaptive_icons.dart';
 import 'package:animations/animations.dart';
 import 'package:wave/main.dart';
@@ -33,9 +34,9 @@ class StudioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(
+      floatingActionButton: FloatingActionButton(onPressed: () {HapticFeedback.lightImpact(); Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (BuildContext context) => const RecordScreen(title: 'New recording'),
-      )), child: Icon(AdaptiveIcons.mic)),
+      ));}, child: Icon(AdaptiveIcons.mic)),
       appBar: AppBar(
         title: const Text('Studio'),
         leading: IconButton(icon: const Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer()),
@@ -54,7 +55,10 @@ class StudioScreen extends StatelessWidget {
               closedElevation: 0,
               tappable: false,
               closedBuilder: (_, openContainer) => InkWell(
-                onTap: () => openContainer(),
+                onTap: () {
+                    HapticFeedback.lightImpact();
+                    openContainer();
+                  },
                 borderRadius: const BorderRadius.all(Radius.circular(22)),
                 child: Container(
                   width: 200,
