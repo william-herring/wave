@@ -94,7 +94,13 @@ class _PlotScreenState extends State<PlotScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        leading: IconButton(icon: Icon(Icons.adaptive.more), onPressed: () {}),
+        leading: InkWell(child: Icon(Icons.adaptive.more), onTapDown: (details) => showMenu(context: context, position: RelativeRect.fromLTRB(details.globalPosition.dx, details.globalPosition.dy, double.infinity, double.infinity), color: Theme.of(context).scaffoldBackgroundColor,
+            items: <PopupMenuEntry<int>>[
+              const PopupMenuItem<int>(
+                  value: 0,
+                  child: Text('Rename')
+              ),
+            ])),
         actions: [
           IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () {SoundGenerator.stop(); showAdaptiveAlertDialog(context, () {
             final waves = prefs.getStringList('waves');
