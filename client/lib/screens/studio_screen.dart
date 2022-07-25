@@ -21,7 +21,18 @@ class StudioScreen extends StatelessWidget {
               balance: jsonDecode(element)['balance'], amplitude: jsonDecode(element)['amplitude']),
         )), title: Text(jsonDecode(element)['title']),
             subtitle: Text('Graph', style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.6))),
-            trailing: IconButton(icon: Icon(Icons.more_vert, color: Theme.of(context).primaryColor), onPressed: () {}),
+            trailing: InkWell(child: Icon(Icons.more_vert, color: Theme.of(context).primaryColor), radius: 50,
+                onTapDown: (details) => showMenu(context: context, position: RelativeRect.fromLTRB(details.globalPosition.dx, details.globalPosition.dy, 0, 0), color: Theme.of(context).scaffoldBackgroundColor,
+                    items: <PopupMenuEntry<int>>[
+                      const PopupMenuItem<int>(
+                        value: 0,
+                        child: Text('Delete')
+                      ),
+                      const PopupMenuItem<int>(
+                          value: 1,
+                          child: Text('Rename')
+                      ),
+                ])),
         ))
     );
 
