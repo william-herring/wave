@@ -106,6 +106,7 @@ class _PlotScreenState extends State<PlotScreen> {
             final waves = prefs.getStringList('waves');
             final data = jsonEncode({
               'title': title,
+              'type': 'Graph',
               'frequency': frequency,
               'balance': balance,
               'amplitude': amplitude

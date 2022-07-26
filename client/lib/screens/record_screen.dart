@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
 import '../adaptive/adaptive_icons.dart';
+import '../main.dart';
 import 'app_view.dart';
 
 class RecordScreen extends StatefulWidget {
@@ -18,6 +21,7 @@ class _RecordScreenState extends State<RecordScreen> {
   late final PlayerController playerController;
   bool isRecording = false;
   bool isPlaying = false;
+  String path = '';
   bool paused = false;
   List<double> waveData = [];
   _RecordScreenState(this.title);
@@ -76,6 +80,7 @@ class _RecordScreenState extends State<RecordScreen> {
     await playerController.startPlayer();
     setState(() {
       isPlaying = true;
+      path = path;
     });
   }
 
@@ -97,6 +102,25 @@ class _RecordScreenState extends State<RecordScreen> {
               isRecording = false;
               waveData = recorderController.waveData;
             }));
+            final waves = prefs.getStringList('waves');
+            final data = jsonEncode({
+              'title': title,
+              'type': 'Recording',
+              'path': path,
+            });
+            bool save = false;
+            waves?.forEach((element) {
+              if (jsonDecode(element)['title'] == title) {
+                waves[waves.indexOf(element)] = data;
+                prefs.setStringList('waves', waves);
+                save = true;
+                return;
+              }
+            });
+            if (!save) {
+              prefs.setStringList(
+                  'waves', waves == null ? [data] : waves + [data]);
+            }
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AppView(page: 1)));
           })),
         ],

@@ -20,7 +20,7 @@ class StudioScreen extends StatelessWidget {
           builder: (BuildContext context) => PlotScreen(title: jsonDecode(element)['title'], frequency: jsonDecode(element)['frequency'],
               balance: jsonDecode(element)['balance'], amplitude: jsonDecode(element)['amplitude']),
         )), title: Text(jsonDecode(element)['title']),
-            subtitle: Text('Graph', style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.6))),
+            subtitle: Text(jsonDecode(element)['type'], style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.6))),
             trailing: InkWell(child: Icon(Icons.more_vert, color: Theme.of(context).primaryColor), radius: 50,
                 onTapDown: (details) => showMenu(context: context, position: RelativeRect.fromLTRB(details.globalPosition.dx, details.globalPosition.dy, 0, 0), color: Theme.of(context).scaffoldBackgroundColor,
                     items: <PopupMenuEntry<int>>[
