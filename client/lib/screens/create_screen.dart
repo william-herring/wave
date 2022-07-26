@@ -22,19 +22,16 @@ class _CreateScreenState extends State<CreateScreen> {
   _CreateScreenState(this.closeContainer);
 
   String getUntitled() {
-    if (mode == 'plot') {
-      String u = 'Untitled';
-      final data = prefs.getStringList('waves');
-      int i = 0;
-      data?.forEach((element) {
-        if (u == jsonDecode(element)['title']) {
-          i += 1;
-          u = 'Unititled (${i})';
-        }
-      });
-      return u;
-    }
-    return 'Untitled';
+    String u = 'Untitled';
+    final data = prefs.getStringList('waves');
+    int i = 0;
+    data?.forEach((element) {
+      if (u == jsonDecode(element)['title']) {
+        i += 1;
+        u = 'Unititled (${i})';
+      }
+    });
+    return u;
   }
 
   @override
@@ -90,7 +87,7 @@ class _CreateScreenState extends State<CreateScreen> {
               InkWell(
                 onTap: () {
                   mode == 'record'? Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (BuildContext context) => RecordScreen(title: title.isEmpty? 'Untitled' : title),
+                    builder: (BuildContext context) => RecordScreen(title: title.isEmpty? getUntitled() : title),
                   )) : Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (BuildContext context) => PlotScreen(title: title.isEmpty? getUntitled() : title),
                   ));
