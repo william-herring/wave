@@ -5,6 +5,7 @@ import 'package:wave/adaptive/adaptive_icons.dart';
 import 'package:animations/animations.dart';
 import 'package:wave/main.dart';
 import 'package:wave/screens/create_screen.dart';
+import 'package:wave/screens/play_screen.dart';
 import 'package:wave/screens/plot_screen.dart';
 import 'package:wave/screens/record_screen.dart';
 
@@ -16,9 +17,11 @@ class StudioScreen extends StatelessWidget {
     final List<Widget> drafts = [];
 
     waves?.forEach((element) => drafts.add(
-        ListTile(onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(
+        ListTile(onTap: () => jsonDecode(element)['type'] == 'Graph'? Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (BuildContext context) => PlotScreen(title: jsonDecode(element)['title'], frequency: jsonDecode(element)['frequency'],
               balance: jsonDecode(element)['balance'], amplitude: jsonDecode(element)['amplitude']),
+        )) : Navigator.push(context, MaterialPageRoute(
+          builder: (BuildContext context) => PlayScreen(title: jsonDecode(element)['title'], path: jsonDecode(element)['path'])
         )), title: Text(jsonDecode(element)['title']),
             subtitle: Text(jsonDecode(element)['type'], style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.6))),
             trailing: InkWell(child: Icon(Icons.more_vert, color: Theme.of(context).primaryColor), radius: 50,

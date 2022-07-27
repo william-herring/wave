@@ -108,6 +108,7 @@ class _RecordScreenState extends State<RecordScreen> {
               'type': 'Recording',
               'path': path,
             });
+            print(data);
             bool save = false;
             waves?.forEach((element) {
               if (jsonDecode(element)['title'] == title) {

@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import 'create_screen.dart';
@@ -31,7 +32,10 @@ class HomeScreen extends StatelessWidget {
                 closedElevation: 0,
                 tappable: false,
                 closedBuilder: (_, openContainer) => InkWell(
-                    onTap: () => openContainer(),
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      openContainer();
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(24),
                       width: MediaQuery.of(context).size.width - 40,
