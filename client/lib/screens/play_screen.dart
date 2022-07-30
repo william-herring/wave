@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../adaptive/adaptive_icons.dart';
+import '../main.dart';
 
 class PlayScreen extends StatefulWidget {
   final String title;
@@ -22,7 +26,6 @@ class _PlayScreenState extends State<PlayScreen> {
   void initState() {
     super.initState();
     playerController = PlayerController();
-    print(path);
     playerController.preparePlayer(path!);
   }
 
@@ -45,13 +48,53 @@ class _PlayScreenState extends State<PlayScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        leading: InkWell(child: Icon(Icons.adaptive.more), onTapDown: (details) => showMenu(context: context, position: RelativeRect.fromLTRB(details.globalPosition.dx, details.globalPosition.dy, double.infinity, double.infinity), color: Theme.of(context).scaffoldBackgroundColor,
+        leading: InkWell(child: Icon(Icons.adaptive.more), onTapDown: (details) => showMenu(context: context,
+            position: RelativeRect.fromLTRB(details.globalPosition.dx, details.globalPosition.dy, double.infinity, double.infinity), color: Theme.of(context).scaffoldBackgroundColor,
             items: <PopupMenuEntry<int>>[
               const PopupMenuItem<int>(
                   value: 0,
                   child: Text('Rename')
               ),
-            ])),
+            ]).then((value) {
+              if (value == 0) {
+                showDialog<bool>(
+                  context: context,
+                  builder: (context) {
+                    return CupertinoAlertDialog(
+                      title: const Text('Rename'),
+                      content: Card(
+                        color: Colors.transparent,
+                        elevation: 0.0,
+                        child: Column(
+                          children: [
+                            CupertinoTextField(
+                              placeholder: 'Title',
+                              onSubmitted: (value) {
+                                final waves = prefs.getStringList('waves');
+                                final data = jsonEncode({
+                                  'title': value,
+                                  'type': 'Recording',
+                                  'path': path,
+                                });
+                                waves?.forEach((element) {
+                                  if (jsonDecode(element)['title'] == title) {
+                                    waves[waves.indexOf(element)] = data;
+                                    prefs.setStringList('waves', waves);
+                                    return;
+                                  }
+                                });
+                                setState(() => title = value);
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+        })),
         actions: [
           IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () => Navigator.pop(context)),
         ],
@@ -59,16 +102,12 @@ class _PlayScreenState extends State<PlayScreen> {
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 40,
-              child: AudioFileWaveforms(
-                enableSeekGesture: true,
-                size: const Size(double.infinity, 80.0),
-                playerWaveStyle: const PlayerWaveStyle(
-                  waveThickness: 4,
-                ),
-                playerController: playerController,
+            AudioFileWaveforms(
+              size: const Size(double.infinity, 80.0),
+              playerWaveStyle: const PlayerWaveStyle(
+                waveThickness: 4,
               ),
+              playerController: playerController,
             ),
             Center(
               child:

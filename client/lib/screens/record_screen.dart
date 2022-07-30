@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:wave/adaptive/adaptive_dialog.dart';
@@ -74,13 +75,13 @@ class _RecordScreenState extends State<RecordScreen> {
         paused = false;
       });
     }
-    var path = await recorderController.stop(false);
-    path = path?.split('file://')[1];
-    await playerController.preparePlayer(path!);
+    var p = await recorderController.stop(false);
+    p = p?.split('file://')[1];
+    await playerController.preparePlayer(p!);
     await playerController.startPlayer();
     setState(() {
       isPlaying = true;
-      path = path;
+      path = p!;
     });
   }
 
@@ -95,7 +96,33 @@ class _RecordScreenState extends State<RecordScreen> {
                   value: 0,
                   child: Text('Rename')
               ),
-            ])),
+            ]).then((value) {
+              if (value == 0) {
+                showDialog<bool>(
+                  context: context,
+                  builder: (context) {
+                    return CupertinoAlertDialog(
+                      title: const Text('Rename'),
+                      content: Card(
+                        color: Colors.transparent,
+                        elevation: 0.0,
+                        child: Column(
+                          children: [
+                            CupertinoTextField(
+                              placeholder: 'Title',
+                              onSubmitted: (value) {
+                                setState(() => title = value);
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+        })),
         actions: [
           IconButton(icon: Icon(AdaptiveIcons.check), onPressed: () => showAdaptiveAlertDialog(context, () {
             recorderController.pause().then((value) => setState(() {
@@ -108,7 +135,6 @@ class _RecordScreenState extends State<RecordScreen> {
               'type': 'Recording',
               'path': path,
             });
-            print(data);
             bool save = false;
             waves?.forEach((element) {
               if (jsonDecode(element)['title'] == title) {
