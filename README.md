@@ -1,5 +1,7 @@
 # Wave
-This app is being built for the Science Talent Search Victoria 2022.
+This app was built for the Science Talent Search Victoria 2022.
+
+```UPDATE: This project won a minor bursary prize in the Computer Programs category```
 
 Wave is an app for viewing sound in waveforms (commonly known as sound waves) and constructing soundwaves with a visual editor. It also features educational resources and online capabilities such as publication of waves for others to use.
 
